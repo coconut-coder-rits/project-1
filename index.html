@@ -1,0 +1,957 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Character Encoding & Viewport -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary Page Metadata & SEO -->
+    <title>Ritvik Varma — Developer &amp; Creative Coder</title>
+    <meta
+      name="description"
+      content="Ritvik Varma, 14-year-old developer from Visakhapatnam, India. I build websites, experiments, creative motion physics, and interactive experiences for the web."
+    />
+    <meta name="author" content="Ritvik Varma" />
+    <meta name="theme-color" content="#0a0a0d" />
+    <link rel="canonical" href="https://ritvikvarma.dev/" />
+
+    <!-- Open Graph / Social Sharing (Facebook, LinkedIn, Discord) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ritvikvarma.dev/" />
+    <meta
+      property="og:title"
+      content="Ritvik Varma — Developer &amp; Creative Coder"
+    />
+    <meta
+      property="og:description"
+      content="14-year-old developer building websites, experiments, and interactive web experiences with creative motion."
+    />
+    <meta property="og:image" content="assets/image.png" />
+    <meta property="og:site_name" content="Ritvik Varma Portfolio" />
+
+    <!-- Twitter Card Metadata -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Ritvik Varma — Developer &amp; Creative Coder"
+    />
+    <meta
+      name="twitter:description"
+      content="14-year-old developer building websites, experiments, and interactive web experiences with creative motion."
+    />
+    <meta name="twitter:image" content="assets/image.png" />
+
+    <!-- Favicon (Inline SVG Monogram Badge) -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%230a0a0d' stroke='%23e7cca0' stroke-width='2'/%3E%3Ctext x='16' y='21' font-family='sans-serif' font-size='11' font-weight='bold' fill='%23e7cca0' text-anchor='middle'%3ERV%3C/text%3E%3C/svg%3E"
+    />
+
+    <!-- Google Web Fonts (Outfit, Inter, JetBrains Mono) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- Accessible Skip to Main Content Link -->
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <!-- ==========================================
+     CUSTOM CURSOR (Rendered on non-touch devices)
+     ========================================== -->
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-circle" aria-hidden="true"></div>
+    <div class="cursor-view-text" aria-hidden="true">VIEW</div>
+    <div class="site-grain" aria-hidden="true"></div>
+
+    <!-- ==========================================
+     PRELOADER (Multilingual Greetings)
+     ========================================== -->
+    <div
+      class="loader"
+      id="loader"
+      role="status"
+      aria-label="Loading portfolio"
+    >
+      <div class="loader-gradient" aria-hidden="true"></div>
+      <div class="loader-orb loader-orb-gold" aria-hidden="true"></div>
+      <div class="loader-orb loader-orb-blue" aria-hidden="true"></div>
+      <div class="loader-glow" aria-hidden="true"></div>
+      <div class="loader-content">
+        <div class="loader-counter" id="loaderCounter">00</div>
+        <div class="loader-greeting">
+          <span class="loader-word" id="loaderWord">Hello</span>
+        </div>
+        <div class="loader-progress">
+          <div class="loader-progress-bar" id="loaderProgressBar"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+     HEADER NAVIGATION (Glass Capsule)
+     ========================================== -->
+    <nav class="nav" id="nav" aria-label="Main Navigation">
+      <div class="nav-inner">
+        <div class="nav-left">
+          <!-- Theme Toggle Button -->
+          <button
+            class="theme-toggle-btn"
+            id="themeToggle"
+            aria-label="Switch to light theme"
+            data-magnetic
+          >
+            <svg
+              class="sun-icon"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="4"></circle>
+              <line x1="12" y1="2" x2="12" y2="4"></line>
+              <line x1="12" y1="20" x2="12" y2="22"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="2" y1="12" x2="4" y2="12"></line>
+              <line x1="20" y1="12" x2="22" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+          </button>
+
+          <!-- Brand Logo Monogram -->
+          <a
+            href="#top"
+            class="nav-logo"
+            aria-label="Ritvik Varma Home"
+            data-magnetic
+          >
+            <span class="nav-logo-badge">RV</span>
+            <span class="nav-logo-text">RITVIK VARMA</span>
+          </a>
+        </div>
+
+        <!-- Desktop Navigation Links -->
+        <div class="nav-links">
+          <a href="#top" class="nav-link active" data-nav-link data-magnetic
+            >HOME</a
+          >
+          <a href="#about" class="nav-link" data-nav-link data-magnetic
+            >ABOUT</a
+          >
+          <a href="#skills" class="nav-link" data-nav-link data-magnetic
+            >SKILLS</a
+          >
+          <a href="#work" class="nav-link" data-nav-link data-magnetic>WORK</a>
+          <a href="#journey" class="nav-link" data-nav-link data-magnetic
+            >JOURNEY</a
+          >
+          <a href="#blogs" class="nav-link" data-nav-link data-magnetic
+            >BLOGS</a
+          >
+          <a href="#contact" class="nav-link" data-nav-link data-magnetic
+            >CONTACT</a
+          >
+        </div>
+
+        <!-- Header Actions -->
+        <div class="nav-actions">
+          <a
+            href="mailto:hello@ritvikvarma.dev"
+            class="nav-cta-btn"
+            data-magnetic
+          >
+            <span>GET IN TOUCH</span>
+          </a>
+          <button
+            class="menu-toggle"
+            id="menuToggle"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+            aria-controls="mobileMenu"
+          >
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ==========================================
+     MOBILE NAVIGATION DRAWER
+     ========================================== -->
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <nav class="mobile-menu-links" aria-label="Mobile Navigation Menu">
+        <a href="#top" class="mobile-menu-link" data-mobile-link>Home</a>
+        <a href="#about" class="mobile-menu-link" data-mobile-link>About</a>
+        <a href="#skills" class="mobile-menu-link" data-mobile-link>Skills</a>
+        <a href="#work" class="mobile-menu-link" data-mobile-link>Work</a>
+        <a href="#journey" class="mobile-menu-link" data-mobile-link>Journey</a>
+        <a href="#blogs" class="mobile-menu-link" data-mobile-link>Blogs</a>
+        <a href="#contact" class="mobile-menu-link" data-mobile-link>Contact</a>
+      </nav>
+    </div>
+
+    <!-- ==========================================
+     MAIN CONTENT WRAPPER
+     ========================================== -->
+    <main id="main">
+      <!-- 1. HERO SECTION -->
+      <section class="hero" id="top">
+        <div class="hero-bg-media" aria-hidden="true"></div>
+        <div class="hero-bg-overlay" aria-hidden="true"></div>
+
+        <div class="hero-content">
+          <div class="hero-meta">
+            <div class="hero-status-pill reveal-text" data-reveal>
+              <span class="status-dot"></span>
+              <span>AVAILABLE FOR SMALL PROJECTS</span>
+            </div>
+            <div class="hero-location-badge reveal-text" data-reveal>
+              <svg
+                class="location-icon"
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <span>VISAKHAPATNAM, INDIA</span>
+            </div>
+          </div>
+
+          <div class="hero-title">
+            <h1 class="reveal-text" data-reveal>
+              <span class="hero-name-first">RITVIK</span>
+              <span class="hero-name-last">VARMA</span>
+            </h1>
+          </div>
+
+          <div class="hero-description">
+            <p class="reveal-text" data-reveal>
+              14 / Developer — I build websites, experiments,<br />
+              and interactive experiences for the web.<br />
+              Started coding at 13, with curiosity and a lot of ideas.<br />
+              Still learning, building, and honestly,<br />
+              just getting started. ✦
+            </p>
+          </div>
+
+          <div class="hero-actions reveal-text" data-reveal>
+            <a href="#work" class="hero-btn-primary" data-magnetic>
+              <span>VIEW WORK</span>
+              <span class="arrow">↗</span>
+            </a>
+            <a href="#contact" class="hero-btn-secondary" data-magnetic>
+              <span>GET IN TOUCH</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-bottom-bar">
+          <div class="hero-socials">
+            <a
+              href="https://github.com/coconut-coder-rits"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hero-social-btn"
+              aria-label="GitHub Profile"
+              data-magnetic
+            >
+              <svg
+                width="17"
+                height="17"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                ></path>
+              </svg>
+            </a>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hero-social-btn"
+              aria-label="Instagram Profile"
+              data-magnetic
+            >
+              <svg
+                width="17"
+                height="17"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path
+                  d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                ></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hero-social-btn"
+              aria-label="LinkedIn Profile"
+              data-magnetic
+            >
+              <svg
+                width="17"
+                height="17"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path
+                  d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                ></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </a>
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hero-social-btn"
+              aria-label="Twitter / X Profile"
+              data-magnetic
+            >
+              <svg
+                width="17"
+                height="17"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path
+                  d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"
+                ></path>
+              </svg>
+            </a>
+          </div>
+
+          <div class="scroll-indicator" aria-hidden="true">
+            <span>SCROLL</span>
+            <div class="scroll-line">
+              <div class="scroll-line-pulse"></div>
+            </div>
+          </div>
+
+          <div class="hero-bottom-spacer" aria-hidden="true"></div>
+        </div>
+      </section>
+
+      <!-- 2. MARQUEE TICKER -->
+      <div class="marquee-container" aria-hidden="true">
+        <div class="marquee-track">
+          <div class="marquee-content">
+            <span class="marquee-item"
+              >Ritvik Varma <span class="marquee-dot"></span
+            ></span>
+            <span class="marquee-item"
+              >Frontend Developer <span class="marquee-dot"></span
+            ></span>
+            <span class="marquee-item"
+              >Creative Coder <span class="marquee-dot"></span
+            ></span>
+            <span class="marquee-item"
+              >Interactive Design <span class="marquee-dot"></span
+            ></span>
+          </div>
+          <div class="marquee-content">
+            <span class="marquee-item"
+              >Ritvik Varma <span class="marquee-dot"></span
+            ></span>
+            <span class="marquee-item"
+              >Frontend Developer <span class="marquee-dot"></span
+            ></span>
+            <span class="marquee-item"
+              >Creative Coder <span class="marquee-dot"></span
+            ></span>
+            <span class="marquee-item"
+              >Interactive Design <span class="marquee-dot"></span
+            ></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. ABOUT SECTION -->
+      <section class="section" id="about">
+        <div class="section-label">01 / Who I Am</div>
+
+        <div class="about-content">
+          <p class="about-statement scroll-reveal" data-scroll-reveal>
+            I'm Ritvik Varma, a <em>14-year-old developer</em> who enjoys
+            building websites, experimenting with new technology, and turning
+            ideas into <em>interactive experiences</em> for the web.
+          </p>
+
+          <div class="about-details">
+            <div
+              class="about-detail-item scroll-reveal sr-delay-1"
+              data-scroll-reveal
+            >
+              <div class="about-detail-label">Based In</div>
+              <div class="about-detail-value">Visakhapatnam, India</div>
+            </div>
+            <div
+              class="about-detail-item scroll-reveal sr-delay-2"
+              data-scroll-reveal
+            >
+              <div class="about-detail-label">Currently Learning</div>
+              <div class="about-detail-value">React, Node.js &amp; APIs</div>
+            </div>
+            <div
+              class="about-detail-item scroll-reveal sr-delay-3"
+              data-scroll-reveal
+            >
+              <div class="about-detail-label">Interests</div>
+              <div class="about-detail-value">
+                Creative motion , GSAP, &amp; AI
+              </div>
+            </div>
+            <div
+              class="about-detail-item scroll-reveal sr-delay-4"
+              data-scroll-reveal
+            >
+              <div class="about-detail-label">Status</div>
+              <div class="about-detail-value">
+                Open to small projects &amp; collabs
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. SKILLS SECTION -->
+      <section class="section" id="skills">
+        <div class="section-label">02 / Skills &amp; Tools</div>
+
+        <div class="skills-grid">
+          <div
+            class="skills-category scroll-reveal sr-delay-1"
+            data-scroll-reveal
+          >
+            <div class="skill-card-shine"></div>
+            <h3>Frontend</h3>
+            <div class="skill-item">
+              <span>HTML5</span><span class="skill-badge">Semantic</span>
+            </div>
+            <div class="skill-item">
+              <span>CSS3</span><span class="skill-badge">Animations</span>
+            </div>
+            <div class="skill-item">
+              <span>JavaScript</span
+              ><span class="skill-badge">ES6+ &amp; DOM</span>
+            </div>
+            <div class="skill-item">
+              <span>Tailwind CSS</span><span class="skill-badge">Utility</span>
+            </div>
+            <div class="skill-item">
+              <span>Bootstrap</span><span class="skill-badge">Layout</span>
+            </div>
+          </div>
+
+          <div
+            class="skills-category scroll-reveal sr-delay-2"
+            data-scroll-reveal
+          >
+            <div class="skill-card-shine"></div>
+            <h3>Programming</h3>
+            <div class="skill-item">
+              <span>Java</span><span class="skill-badge">OOP</span>
+            </div>
+            <div class="skill-item">
+              <span>Python</span
+              ><span class="skill-badge">APIs &amp; Logic</span>
+            </div>
+          </div>
+
+          <div
+            class="skills-category scroll-reveal sr-delay-3"
+            data-scroll-reveal
+          >
+            <div class="skill-card-shine"></div>
+            <h3>Tools &amp; Workflow</h3>
+            <div class="skill-item">
+              <span>Git</span><span class="skill-badge">Version Control</span>
+            </div>
+            <div class="skill-item">
+              <span>GitHub</span><span class="skill-badge">Open Source</span>
+            </div>
+            <div class="skill-item">
+              <span>Astro / Markdown</span
+              ><span class="skill-badge">Content</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. RECENT WORK SECTION -->
+      <section class="section" id="work">
+        <div class="work-header">
+          <div>
+            <h2 class="work-title scroll-reveal" data-scroll-reveal>
+              <span class="heading-word">Recent</span>
+              <span class="heading-word">Work</span>
+            </h2>
+            <p
+              class="work-subtitle scroll-reveal sr-delay-1"
+              data-scroll-reveal
+            >
+              Interactive projects, experiments, and web apps.
+            </p>
+          </div>
+          <span
+            class="work-count scroll-reveal"
+            data-scroll-reveal
+            id="workCount"
+            >04 Projects</span
+          >
+        </div>
+
+        <div class="project-list" id="projectList">
+          <!-- Injected dynamically by script.js -->
+        </div>
+      </section>
+
+      <!-- 6. JOURNEY & MENTORSHIP TIMELINE -->
+      <section class="section" id="journey">
+        <div class="section-label">03 / My Journey</div>
+
+        <div class="journey-timeline">
+          <div class="journey-item scroll-reveal sr-delay-1" data-scroll-reveal>
+            <div class="journey-dot"></div>
+            <div class="journey-content">
+              <span class="journey-year">2025</span>
+              <h3 class="journey-title">Where It Started</h3>
+              <p class="journey-text">
+                Picked up my first line of code out of pure curiosity — no plan,
+                just a lot of questions and an urge to build something real.
+              </p>
+            </div>
+          </div>
+
+          <div class="journey-item scroll-reveal sr-delay-2" data-scroll-reveal>
+            <div class="journey-dot"></div>
+            <div class="journey-content">
+              <span class="journey-year">2025</span>
+              <h3 class="journey-title">Finding a Mentor</h3>
+              <p class="journey-text">
+                Started learning under <strong>Ajay Panigrahi</strong>, whose
+                guidance shaped how I think about building things — not just
+                writing code, but building with intention.
+              </p>
+            </div>
+          </div>
+
+          <div class="journey-item scroll-reveal sr-delay-3" data-scroll-reveal>
+            <div class="journey-dot"></div>
+            <div class="journey-content">
+              <span class="journey-year">2026</span>
+              <h3 class="journey-title">Building My Own Path</h3>
+              <p class="journey-text">
+                Took what I learned and started shipping my own projects and
+                experiments — still learning every day, still building.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mentor Gratitude Card -->
+        <div class="journey-thanks scroll-reveal sr-delay-4" data-scroll-reveal>
+          <p class="journey-thanks-text">
+            A special thanks to <strong>Ajay Panigrahi</strong> for the
+            mentorship and guidance that helped me get here.
+          </p>
+          <a
+            href="https://www.ajaypanigrahi.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="journey-thanks-link"
+            data-magnetic
+          >
+            <span>Visit his website</span>
+            <span>↗</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 7. BLOGS & INSIGHTS SECTION -->
+      <section class="section" id="blogs">
+        <div class="section-label">04 / Writing &amp; Insights</div>
+        <div class="blogs-header">
+          <div>
+            <h2 class="blogs-title scroll-reveal" data-scroll-reveal>
+              <span class="heading-word">Articles</span>
+              <span class="heading-word">&amp;</span>
+              <span class="heading-word">Notes</span>
+            </h2>
+            <p
+              class="blogs-subtitle scroll-reveal sr-delay-1"
+              data-scroll-reveal
+            >
+              Engineering deep dives, creative motion techniques, and journey
+              logs.
+            </p>
+          </div>
+          <span
+            class="blogs-count scroll-reveal"
+            data-scroll-reveal
+            id="blogsCount"
+            >03 Articles</span
+          >
+        </div>
+
+        <div class="blogs-grid" id="blogsGrid">
+          <!-- Injected dynamically by script.js -->
+        </div>
+      </section>
+
+      <!-- 8. CONTACT SECTION -->
+      <section class="contact" id="contact">
+        <div class="contact-inner">
+          <div class="contact-header-top scroll-reveal" data-scroll-reveal>
+            <div class="contact-avatar-pill">
+              <img src="assets/image.png" alt="Ritvik Varma Profile Portrait" />
+            </div>
+            <h2 class="contact-heading-main">
+              <span class="heading-word">Let's</span>
+              <span class="heading-word">work</span><br />
+              <span class="heading-word">together</span>
+            </h2>
+          </div>
+
+          <div
+            class="contact-action-wrapper scroll-reveal sr-delay-1"
+            data-scroll-reveal
+          >
+            <p class="contact-subtext">
+              Have an idea, a project, or just want to chat about creative code?
+              I'm always excited to connect and build something cool.
+            </p>
+            <a
+              href="mailto:hello@ritvikvarma.dev"
+              class="btn-get-in-touch"
+              data-magnetic
+            >
+              <span>Get in touch</span>
+            </a>
+          </div>
+
+          <div
+            class="contact-pills-container scroll-reveal sr-delay-2"
+            data-scroll-reveal
+          >
+            <a
+              href="mailto:hello@ritvikvarma.dev"
+              class="contact-pill-item"
+              data-magnetic
+            >
+              <span>hello@ritvikvarma.dev</span>
+              <span>↗</span>
+            </a>
+            <a href="tel:+916309935436" class="contact-pill-item" data-magnetic>
+              <span>+91 63099 35436</span>
+              <span>↗</span>
+            </a>
+            <a
+              href="https://github.com/coconut-coder-rits"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="contact-pill-item"
+              data-magnetic
+            >
+              <span>GitHub</span>
+              <span>↗</span>
+            </a>
+            <a
+              href="https://wa.me/916309935436"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="contact-pill-item"
+              data-magnetic
+            >
+              <span>WhatsApp</span>
+              <span>↗</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==========================================
+     PREMIUM FOOTER
+     ========================================== -->
+    <footer class="footer">
+      <div class="footer-glow" aria-hidden="true"></div>
+
+      <div class="footer-main">
+        <div class="footer-col footer-brand-col">
+          <span class="footer-eyebrow">Currently</span>
+          <h3 class="footer-statement">
+            Building things,<br />one idea at a time.
+          </h3>
+          <span class="footer-status">
+            <span class="status-dot"></span>Available for small projects
+          </span>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Sitemap</h4>
+          <a href="#top" class="footer-nav-link"><span>Home</span></a>
+          <a href="#about" class="footer-nav-link"><span>About</span></a>
+          <a href="#skills" class="footer-nav-link"><span>Skills</span></a>
+          <a href="#work" class="footer-nav-link"><span>Work</span></a>
+          <a href="#journey" class="footer-nav-link"><span>Journey</span></a>
+          <a href="#blogs" class="footer-nav-link"><span>Blogs</span></a>
+          <a href="#contact" class="footer-nav-link"><span>Contact</span></a>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Connect</h4>
+          <a href="mailto:hello@ritvikvarma.dev" class="footer-nav-link"
+            ><span>Email</span></a
+          >
+          <a
+            href="https://github.com/coconut-coder-rits"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-nav-link"
+            ><span>GitHub</span></a
+          >
+          <a
+            href="https://wa.me/916309935436"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-nav-link"
+            ><span>WhatsApp</span></a
+          >
+        </div>
+      </div>
+
+      <div class="footer-wordmark-wrap">
+        <span class="footer-wordmark">Ritvik Varma</span>
+      </div>
+
+      <div class="footer-bottom">
+        <span class="footer-copy"
+          >© 2026 Ritvik Varma. All rights reserved.</span
+        >
+        <span class="footer-built">Built with HTML · CSS · JavaScript</span>
+        <button
+          class="footer-to-top"
+          id="footerToTop"
+          aria-label="Back to top"
+          data-magnetic
+        >
+          <span class="footer-to-top-circle">
+            <span class="footer-to-top-arrow">↑</span>
+          </span>
+          <span>Top</span>
+        </button>
+      </div>
+    </footer>
+
+    <!-- ==========================================
+     PROJECT HOVER PREVIEW (Desktop only)
+     ========================================== -->
+    <div class="project-preview" id="projectPreview" aria-hidden="true">
+      <img
+        id="projectPreviewImg"
+        src="assets/project-portfolio.jpg"
+        alt="Project Preview Screenshot"
+      />
+    </div>
+
+    <!-- ==========================================
+     PROJECT DETAIL OVERLAY (Accessible Modal)
+     ========================================== -->
+    <div
+      class="project-detail"
+      id="projectDetail"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="detailTitle"
+      aria-hidden="true"
+    >
+      <button
+        class="project-detail-close"
+        id="projectDetailClose"
+        aria-label="Close project modal"
+      >
+        <span aria-hidden="true">✕</span>
+      </button>
+
+      <div class="project-detail-hero" id="detailHero">
+        <img
+          id="detailHeroImg"
+          src="assets/project-portfolio.jpg"
+          alt="Project Hero Image"
+        />
+      </div>
+
+      <div class="project-detail-content">
+        <div class="project-detail-header">
+          <div>
+            <h2 class="project-detail-title" id="detailTitle">Project</h2>
+            <p class="project-detail-desc" id="detailDesc">Description</p>
+          </div>
+          <div class="project-detail-meta" id="detailMeta"></div>
+        </div>
+
+        <div class="project-detail-body">
+          <div class="project-detail-section">
+            <h3>The Challenge</h3>
+            <p id="detailChallenge"></p>
+          </div>
+          <div class="project-detail-section">
+            <h3>The Approach</h3>
+            <p id="detailSolution"></p>
+          </div>
+          <div class="project-detail-section">
+            <h3>Outcome</h3>
+            <p id="detailOutcome"></p>
+          </div>
+          <div class="project-detail-section">
+            <h3>Links</h3>
+            <div class="project-detail-links" id="detailLinks"></div>
+          </div>
+        </div>
+
+        <div class="project-nav">
+          <button class="project-nav-link" id="prevProject">← Previous</button>
+          <a href="#work" class="project-nav-link" id="backToWork"
+            >Back to Work</a
+          >
+          <button class="project-nav-link" id="nextProject">Next →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+     BLOG READER OVERLAY (Astro Markdown Viewer)
+     ========================================== -->
+    <div
+      class="blog-reader"
+      id="blogReader"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Article Reader"
+      aria-hidden="true"
+    >
+      <div class="blog-reader-progress-track">
+        <div class="blog-reader-progress-bar" id="blogReaderBar"></div>
+      </div>
+      <button
+        class="blog-reader-close"
+        id="blogReaderClose"
+        aria-label="Close Article Reader"
+      >
+        <span aria-hidden="true">✕</span>
+      </button>
+
+      <div class="blog-reader-container">
+        <header class="blog-reader-header">
+          <div class="blog-reader-tags" id="blogReaderTags"></div>
+          <h1 class="blog-reader-title" id="blogReaderTitle"></h1>
+          <div class="blog-reader-meta" id="blogReaderMeta">
+            <div class="blog-author">
+              <div class="blog-author-avatar">
+                <img src="assets/image.png" alt="Author Ritvik Varma" />
+              </div>
+              <div>
+                <span class="blog-author-name">Ritvik Varma</span>
+                <span class="blog-author-role">14-year-old Developer</span>
+              </div>
+            </div>
+            <div class="blog-meta-right">
+              <span id="blogReaderDate"></span>
+              <span class="meta-separator">•</span>
+              <span id="blogReaderTime"></span>
+            </div>
+          </div>
+        </header>
+
+        <article
+          class="blog-reader-content markdown-body"
+          id="blogReaderContent"
+        >
+          <!-- Rendered Markdown Content Injected Dynamically -->
+        </article>
+
+        <div class="blog-reader-nav">
+          <button class="blog-nav-btn" id="prevBlogBtn">
+            ← Previous Article
+          </button>
+          <button class="blog-nav-btn" id="backToBlogsBtn">
+            Back to All Articles
+          </button>
+          <button class="blog-nav-btn" id="nextBlogBtn">Next Article →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cute Cat Widget -->
+    <div class="cat-widget" aria-hidden="false">
+      <button class="cat-toggle" id="catToggle" aria-label="Toggle cute cats" title="Cute cats">🐱</button>
+
+      <div class="cat-panel" id="catPanel" role="dialog" aria-label="Cute cats" aria-hidden="true">
+        <button class="cat-panel-close" id="catClose" aria-label="Close cat panel">✕</button>
+        <div class="cat-panel-inner">
+          <img id="catImage" src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Cute cat GIF" />
+          <div class="cat-panel-controls">
+            <button id="catPrev" class="cat-nav" aria-label="Previous cat">‹</button>
+            <button id="catNext" class="cat-nav" aria-label="Next cat">›</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Application Script -->
+    <script src="script.js"></script>
+  </body>
+</html>
