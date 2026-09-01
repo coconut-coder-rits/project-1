@@ -103,6 +103,44 @@ document.addEventListener("DOMContentLoaded", () => {
       liveUrl: "https://github.com/coconut-coder-rits",
       githubUrl: "https://github.com/coconut-coder-rits",
     },
+    {
+      id: "geo-weather",
+      num: "05",
+      name: "Geo Weather",
+      tech: "Weather API / JavaScript / Fetch / UI Testing",
+      image: "assets/geo.png",
+      year: "2026",
+      role: "API Testing & Weather App",
+      description:
+        "A weather-focused API project built to test live weather data responses, UI states, and real-time request handling in a lightweight front-end workflow.",
+      challenge:
+        "Connecting to a weather API cleanly, handling asynchronous fetch responses, and validating loading, error, and successful data states without breaking the user experience.",
+      solution:
+        "Built a simple API-driven interface with structured fetch logic, condition-based rendering, and responsive states for different response outcomes.",
+      outcome:
+        "A clean testing app that demonstrates practical weather API integration and front-end validation workflows for real data-driven applications.",
+      liveUrl: "https://github.com/coconut-coder-rits",
+      githubUrl: "https://github.com/coconut-coder-rits",
+    },
+    {
+      id: "uniswa",
+      num: "06",
+      name: "UNISWA Exports & Imports",
+      tech: "Business Website / Company Profile / HTML / CSS / JS",
+      image: "assets/uniswa.png",
+      year: "2026",
+      role: "Company Portfolio & Brand Presence",
+      description:
+        "A business-focused company profile for UNISWA, an exports and imports company, designed to present services, credibility, and the brand clearly to clients and partners.",
+      challenge:
+        "Building a polished company website that communicates trust, professionalism, and trade capability while keeping the experience clean and modern for business stakeholders.",
+      solution:
+        "Created a refined corporate landing experience with strong hierarchy, clear business messaging, and a straightforward interface suited for export-import branding.",
+      outcome:
+        "A professional, easy-to-navigate company site that reflects the UNISWA brand and supports business-facing communication.",
+      liveUrl: "https://github.com/coconut-coder-rits",
+      githubUrl: "https://github.com/coconut-coder-rits",
+    },
   ];
 
   // ==========================================================================
@@ -393,9 +431,6 @@ I am currently working on connecting local Python microservices to my interactiv
         "aria-label",
         isLight ? "Switch to dark theme" : "Switch to light theme",
       );
-      themeToggle.innerHTML = isLight
-        ? `<svg class="moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`
-        : `<svg class="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><line x1="12" y1="2" x2="12" y2="4"></line><line x1="12" y1="20" x2="12" y2="22"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="2" y1="12" x2="4" y2="12"></line><line x1="20" y1="12" x2="22" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
     }
 
     localStorage.setItem("rv_portfolio_theme", theme);
@@ -794,7 +829,6 @@ I am currently working on connecting local Python microservices to my interactiv
           <div class="code-block-header">
             <span>${language}</span>
             <button class="code-copy-btn" aria-label="Copy code snippet">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
               <span>Copy</span>
             </button>
           </div>
@@ -853,7 +887,7 @@ I am currently working on connecting local Python microservices to my interactiv
           <span class="blog-date">${blog.date}</span>
           <div class="blog-read-link">
             <span>Read Article</span>
-            <span>→</span>
+            <span aria-hidden="true">↗</span>
           </div>
         </div>
       </article>
@@ -967,10 +1001,11 @@ I am currently working on connecting local Python microservices to my interactiv
         try {
           await navigator.clipboard.writeText(codeEl.textContent || "");
           btn.classList.add("copied");
-          btn.innerHTML = `<span>Copied! ✓</span>`;
+          const labelEl = btn.querySelector("span");
+          if (labelEl) labelEl.textContent = "Copied!";
           setTimeout(() => {
             btn.classList.remove("copied");
-            btn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span>`;
+            if (labelEl) labelEl.textContent = "Copy";
           }, 2000);
         } catch (err) {
           console.warn("Clipboard write failed", err);
@@ -1110,95 +1145,4 @@ I am currently working on connecting local Python microservices to my interactiv
       }
     });
   });
-
-  // Cute Cat Widget — lightweight toggle and GIF cycling
-  (function setupCatWidget() {
-    const catGifs = [
-      "https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif",
-      "https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif",
-      "https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif",
-      "https://media.giphy.com/media/VbnUQpnihPSIgIXuZv/giphy.gif",
-      "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTFrZzBodWFrZnR5NnkzdTdjeGtqaHBnOHNjNmUxZmI2cTY3M3RndSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/tphCApwvdtC1VJabZ1/giphy.gif",
-    ];
-
-    const catToggle = document.getElementById("catToggle");
-    const catPanel = document.getElementById("catPanel");
-    const catImage = document.getElementById("catImage");
-    const catClose = document.getElementById("catClose");
-    const catPrev = document.getElementById("catPrev");
-    const catNext = document.getElementById("catNext");
-    let catIndex = 0;
-    let catTimer = null;
-
-    function showCatPanel(open) {
-      if (!catPanel) return;
-      if (open) {
-        catPanel.classList.add("open");
-        catPanel.setAttribute("aria-hidden", "false");
-        startCycle();
-      } else {
-        catPanel.classList.remove("open");
-        catPanel.setAttribute("aria-hidden", "true");
-        stopCycle();
-      }
-    }
-
-    function startCycle() {
-      if (typeof prefersReducedMotion !== "undefined" && prefersReducedMotion)
-        return; // respect reduced-motion
-      stopCycle();
-      catTimer = setInterval(() => {
-        catIndex = (catIndex + 1) % catGifs.length;
-        if (catImage) catImage.src = catGifs[catIndex];
-      }, 3000);
-    }
-
-    function stopCycle() {
-      if (catTimer) {
-        clearInterval(catTimer);
-        catTimer = null;
-      }
-    }
-
-    function showIndex(i) {
-      catIndex = (i + catGifs.length) % catGifs.length;
-      if (catImage) catImage.src = catGifs[catIndex];
-    }
-
-    if (catToggle) {
-      catToggle.addEventListener("click", () => {
-        const isOpen = catPanel && catPanel.classList.contains("open");
-        showCatPanel(!isOpen);
-      });
-    }
-
-    if (catClose) catClose.addEventListener("click", () => showCatPanel(false));
-    if (catPrev)
-      catPrev.addEventListener("click", () => {
-        showIndex(catIndex - 1);
-      });
-    if (catNext)
-      catNext.addEventListener("click", () => {
-        showIndex(catIndex + 1);
-      });
-
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        if (catPanel && catPanel.classList.contains("open"))
-          showCatPanel(false);
-      }
-    });
-
-    // Close panel when clicking outside
-    document.addEventListener(
-      "click",
-      (e) => {
-        const within = e.target.closest && e.target.closest(".cat-widget");
-        if (!within && catPanel && catPanel.classList.contains("open")) {
-          showCatPanel(false);
-        }
-      },
-      true,
-    );
-  })();
 });
