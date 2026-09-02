@@ -302,6 +302,229 @@ I am currently working on connecting local Python microservices to my interactiv
   ).matches;
 
   // ==========================================================================
+  // 2A. LENIS SMOOTH-SCROLL (safe, reduced-motion-aware)
+  // ==========================================================================
+  let lenisInstance = null;
+  let lenisRafId = null;
+  let lenisReady = false;
+  const scrollProgressTrack = document.getElementById("scrollProgressTrack");
+  const scrollProgressThumb = document.getElementById("scrollProgressThumb");
+  let thumbCurrentY = 0;
+  let thumbTargetY = 0;
+  let thumbLerpFrame = null;
+  let scrollbarIdleTimer = null;
+  let isDraggingScrollbar = false;
+
+  function applyScrollbarVisualState(isActive) {
+    if (!scrollProgressTrack || !scrollProgressThumb) return;
+
+    scrollProgressTrack.classList.toggle("is-active", isActive);
+    scrollProgressThumb.classList.toggle("is-active", isActive);
+
+    if (isActive) {
+      clearTimeout(scrollbarIdleTimer);
+      scrollbarIdleTimer = setTimeout(() => {
+        scrollProgressTrack.classList.remove("is-active");
+        scrollProgressThumb.classList.remove("is-active");
+      }, 600);
+    }
+  }
+
+  function updateScrollThumbVisual() {
+    if (!scrollProgressTrack || !scrollProgressThumb) return;
+
+    const trackHeight = scrollProgressTrack.clientHeight;
+    const thumbHeight = Math.max(
+      48,
+      (window.innerHeight / document.documentElement.scrollHeight) *
+        trackHeight,
+    );
+    const maxTravel = Math.max(trackHeight - thumbHeight, 0);
+
+    scrollProgressThumb.style.height = `${thumbHeight}px`;
+    scrollProgressThumb.style.width = `${prefersReducedMotion ? 8 : 10}px`;
+
+    if (lenisInstance) {
+      const progress = Math.min(Math.max(lenisInstance.progress, 0), 1);
+      thumbTargetY = maxTravel * progress;
+    }
+
+    if (thumbLerpFrame) return;
+
+    const animateThumb = () => {
+      thumbCurrentY += (thumbTargetY - thumbCurrentY) * 0.14;
+      scrollProgressThumb.style.transform = `translateY(${thumbCurrentY}px)`;
+
+      if (Math.abs(thumbTargetY - thumbCurrentY) > 0.2) {
+        thumbLerpFrame = requestAnimationFrame(animateThumb);
+      } else {
+        thumbCurrentY = thumbTargetY;
+        scrollProgressThumb.style.transform = `translateY(${thumbCurrentY}px)`;
+        thumbLerpFrame = null;
+      }
+    };
+
+    thumbLerpFrame = requestAnimationFrame(animateThumb);
+  }
+
+  function bindCustomScrollbar() {
+    if (!scrollProgressTrack || !scrollProgressThumb || !lenisInstance) return;
+
+    document.documentElement.classList.add("lenis-ready");
+    scrollProgressTrack.classList.add("is-visible");
+    scrollProgressThumb.classList.add("is-visible");
+
+    updateScrollThumbVisual();
+
+    lenisInstance.on("scroll", ({ progress }) => {
+      if (!isDraggingScrollbar) {
+        updateScrollThumbVisual();
+      }
+
+      if (progress > 0 || document.documentElement.scrollTop > 0) {
+        applyScrollbarVisualState(true);
+      }
+    });
+
+    const handleThumbPointerDown = (event) => {
+      event.preventDefault();
+      isDraggingScrollbar = true;
+      scrollProgressThumb.setPointerCapture?.(event.pointerId);
+      applyScrollbarVisualState(true);
+    };
+
+    const handleThumbPointerMove = (event) => {
+      if (!isDraggingScrollbar || !lenisInstance) return;
+
+      const trackRect = scrollProgressTrack.getBoundingClientRect();
+      const thumbRect = scrollProgressThumb.getBoundingClientRect();
+      const dragDelta = event.clientY - thumbRect.top - thumbRect.height / 2;
+      const maxThumbTravel = Math.max(trackRect.height - thumbRect.height, 0);
+      const nextProgress = Math.min(
+        Math.max(
+          (event.clientY - trackRect.top - thumbRect.height / 2) /
+            Math.max(maxThumbTravel, 1),
+          0,
+        ),
+        1,
+      );
+
+      const maxScroll = Math.max(
+        document.documentElement.scrollHeight - window.innerHeight,
+        0,
+      );
+
+      if (maxScroll > 0) {
+        lenisInstance.scrollTo(maxScroll * nextProgress, {
+          duration: 0.3,
+        });
+      }
+
+      if (dragDelta !== 0) {
+        applyScrollbarVisualState(true);
+      }
+    };
+
+    const stopDraggingScrollbar = () => {
+      isDraggingScrollbar = false;
+      applyScrollbarVisualState(false);
+    };
+
+    scrollProgressThumb.addEventListener("pointerdown", handleThumbPointerDown);
+    scrollProgressThumb.addEventListener("pointermove", handleThumbPointerMove);
+    scrollProgressThumb.addEventListener("pointerup", stopDraggingScrollbar);
+    scrollProgressThumb.addEventListener("pointerleave", stopDraggingScrollbar);
+    scrollProgressThumb.addEventListener(
+      "pointercancel",
+      stopDraggingScrollbar,
+    );
+
+    scrollProgressTrack.addEventListener("click", (event) => {
+      if (!lenisInstance) return;
+      const rect = scrollProgressTrack.getBoundingClientRect();
+      const clickY = event.clientY - rect.top;
+      const thumbHeight = parseFloat(scrollProgressThumb.style.height || "48");
+      const maxTravel = Math.max(rect.height - thumbHeight, 0);
+      const progress =
+        maxTravel > 0
+          ? Math.min(Math.max((clickY - thumbHeight / 2) / maxTravel, 0), 1)
+          : 0;
+      const maxScroll = Math.max(
+        document.documentElement.scrollHeight - window.innerHeight,
+        0,
+      );
+
+      lenisInstance.scrollTo(maxScroll * progress, { duration: 0.8 });
+      applyScrollbarVisualState(true);
+    });
+
+    window.addEventListener("resize", updateScrollThumbVisual);
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!isDraggingScrollbar) {
+          updateScrollThumbVisual();
+        }
+      },
+      { passive: true },
+    );
+    scrollProgressTrack.addEventListener("pointerenter", () =>
+      applyScrollbarVisualState(true),
+    );
+    scrollProgressTrack.addEventListener("pointerleave", () =>
+      applyScrollbarVisualState(false),
+    );
+  }
+
+  function cleanupLenis() {
+    if (lenisRafId) {
+      cancelAnimationFrame(lenisRafId);
+      lenisRafId = null;
+    }
+
+    if (thumbLerpFrame) {
+      cancelAnimationFrame(thumbLerpFrame);
+      thumbLerpFrame = null;
+    }
+
+    if (lenisInstance && typeof lenisInstance.destroy === "function") {
+      lenisInstance.destroy();
+    }
+
+    lenisInstance = null;
+    lenisReady = false;
+    document.documentElement.classList.remove("lenis-ready");
+    document.documentElement.style.scrollBehavior = "";
+    if (scrollProgressTrack)
+      scrollProgressTrack.classList.remove("is-visible", "is-active");
+    if (scrollProgressThumb)
+      scrollProgressThumb.classList.remove("is-visible", "is-active");
+  }
+
+  try {
+    if (!prefersReducedMotion && typeof window.Lenis !== "undefined") {
+      lenisInstance = new window.Lenis({
+        duration: 1.2,
+        smoothWheel: true,
+      });
+
+      lenisReady = true;
+      document.documentElement.style.scrollBehavior = "auto";
+      bindCustomScrollbar();
+
+      const animate = (time) => {
+        lenisInstance.raf(time);
+        lenisRafId = requestAnimationFrame(animate);
+      };
+
+      lenisRafId = requestAnimationFrame(animate);
+      window.addEventListener("beforeunload", cleanupLenis, { once: true });
+    }
+  } catch (error) {
+    console.warn("Lenis initialization failed:", error);
+  }
+
+  // ==========================================================================
   // 3. DOM ELEMENT REFERENCES
   // ==========================================================================
   const loader = document.getElementById("loader");
@@ -667,6 +890,32 @@ I am currently working on connecting local Python microservices to my interactiv
 
   applyMagneticPhysics();
 
+  function applyCardTilt(selector) {
+    if (isTouchDevice || prefersReducedMotion) return;
+
+    document.querySelectorAll(selector).forEach((card) => {
+      if (card.dataset.tiltBound) return;
+      card.dataset.tiltBound = "true";
+
+      card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const rotateX = ((e.clientY - rect.top) / rect.height - 0.5) * -8;
+        const rotateY = ((e.clientX - rect.left) / rect.width - 0.5) * 8;
+        card.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+      });
+
+      card.addEventListener("mouseleave", () => {
+        card.style.transform =
+          "perspective(600px) rotateX(0deg) rotateY(0deg) translateY(0)";
+        card.style.transition = "transform 0.55s var(--ease-spring)";
+      });
+
+      card.addEventListener("mouseenter", () => {
+        card.style.transition = "transform 0.12s ease-out";
+      });
+    });
+  }
+
   // ==========================================================================
   // 9. RECENT WORK & PROJECT DETAIL MODAL
   // ==========================================================================
@@ -903,21 +1152,9 @@ I am currently working on connecting local Python microservices to my interactiv
           openBlogReader(idx);
         }
       });
-
-      if (!isTouchDevice && !prefersReducedMotion) {
-        card.addEventListener("mousemove", (e) => {
-          const rect = card.getBoundingClientRect();
-          const rx = ((e.clientY - rect.top) / rect.height - 0.5) * -12;
-          const ry = ((e.clientX - rect.left) / rect.width - 0.5) * 12;
-          card.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`;
-        });
-
-        card.addEventListener("mouseleave", () => {
-          card.style.transform =
-            "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)";
-        });
-      }
     });
+
+    applyCardTilt(".blog-card");
   }
 
   renderBlogs();
@@ -1017,21 +1254,7 @@ I am currently working on connecting local Python microservices to my interactiv
   // ==========================================================================
   // 12. 3D CARD TILT FOR SKILLS
   // ==========================================================================
-  if (!isTouchDevice && !prefersReducedMotion) {
-    document.querySelectorAll(".skills-category").forEach((card) => {
-      card.addEventListener("mousemove", (e) => {
-        const rect = card.getBoundingClientRect();
-        const rx = ((e.clientY - rect.top) / rect.height - 0.5) * -10;
-        const ry = ((e.clientX - rect.left) / rect.width - 0.5) * 10;
-        card.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-5px)`;
-      });
-
-      card.addEventListener("mouseleave", () => {
-        card.style.transform =
-          "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)";
-      });
-    });
-  }
+  applyCardTilt(".skills-category, .journey-thanks");
 
   // ==========================================================================
   // 13. SCROLL REVEALS & ACTIVE NAVIGATION TRACKER
@@ -1041,6 +1264,9 @@ I am currently working on connecting local Python microservices to my interactiv
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("visible");
+          if (entry.target.matches(".work-count, .blogs-count")) {
+            animateCounter(entry.target);
+          }
           scrollRevealObserver.unobserve(entry.target);
         }
       });
@@ -1051,6 +1277,73 @@ I am currently working on connecting local Python microservices to my interactiv
   document
     .querySelectorAll("[data-scroll-reveal]")
     .forEach((el) => scrollRevealObserver.observe(el));
+
+  function animateCounter(element) {
+    if (element.dataset.counterAnimated) return;
+    element.dataset.counterAnimated = "true";
+    const match = element.textContent.trim().match(/^(\d+)\s*(.*)$/);
+    if (!match) return;
+
+    const target = Number(match[1]);
+    const suffix = match[2];
+    if (prefersReducedMotion) {
+      element.textContent = `${String(target).padStart(2, "0")} ${suffix}`;
+      return;
+    }
+    const duration = 900;
+    const startTime = performance.now();
+
+    function tick(now) {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      element.textContent = `${String(Math.round(target * eased)).padStart(2, "0")} ${suffix}`;
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+
+    element.textContent = `00 ${suffix}`;
+    requestAnimationFrame(tick);
+  }
+
+  function prepareMotionHooks() {
+    document
+      .querySelectorAll(".skills-grid, .blogs-grid, .project-list")
+      .forEach((grid) => {
+        grid.querySelectorAll(".scroll-reveal").forEach((item, index) => {
+          item.style.transitionDelay = `${index * 80}ms`;
+        });
+      });
+
+    document
+      .querySelectorAll(
+        ".contact-avatar-pill, .project-detail img, .blog-reader img",
+      )
+      .forEach((image) => image.classList.add("image-reveal"));
+
+    document
+      .querySelectorAll(
+        ".hero-btn-primary, .hero-btn-secondary, .btn-get-in-touch, .nav-cta-btn",
+      )
+      .forEach((button) => button.classList.add("btn-sheen"));
+  }
+
+  prepareMotionHooks();
+  applyCardTilt(".skills-category, .blog-card, .journey-thanks");
+
+  const imageRevealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          imageRevealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15 },
+  );
+
+  document
+    .querySelectorAll(".image-reveal")
+    .forEach((image) => imageRevealObserver.observe(image));
 
   const sections = document.querySelectorAll("section[id], footer");
   const navLinks = document.querySelectorAll("[data-nav-link]");

@@ -58,6 +58,7 @@
 
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lenis/1.1.13/lenis.min.js"></script>
   </head>
 
   <body>
@@ -140,7 +141,28 @@
             aria-label="Ritvik Varma Home"
             data-magnetic
           >
-            <span class="nav-logo-badge">RV</span>
+            <span class="nav-logo-badge" aria-hidden="true">
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="16" cy="16" r="15" stroke="currentColor" />
+                <text
+                  x="16"
+                  y="21"
+                  fill="currentColor"
+                  font-family="sans-serif"
+                  font-size="14"
+                  font-weight="700"
+                  text-anchor="middle"
+                >
+                  R
+                </text>
+              </svg>
+            </span>
             <span class="nav-logo-text">RITVIK VARMA</span>
           </a>
         </div>
@@ -933,6 +955,14 @@
           <button class="blog-nav-btn" id="nextBlogBtn">Next Article →</button>
         </div>
       </div>
+    </div>
+
+    <div
+      class="scroll-progress-track"
+      id="scrollProgressTrack"
+      aria-hidden="true"
+    >
+      <div class="scroll-progress-thumb" id="scrollProgressThumb"></div>
     </div>
 
     <!-- Application Script -->
