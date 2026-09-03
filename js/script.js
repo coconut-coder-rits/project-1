@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
       num: "01",
       name: "Zerodha Web Platform",
       tech: "HTML5 / CSS3 Flexbox / Semantic Web",
-      image: "assets/zerodha.png",
+      image: "assets/zerodha.webp",
       year: "2026",
       role: "Frontend Development",
       description:
@@ -50,8 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
       num: "02",
       name: "Flappy Bird: Colorful Edition",
       tech: "Vanilla JavaScript / Game Physics / CSS3",
-      image:
-        "https://imgs.search.brave.com/yuLEpprTgfyUp8S0RFx-9rizkUrfUr8jwvwC0_jYZEw/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDY5NTY4/OTkuanBn",
+      image: "assets/flappy.webp",
       year: "2026",
       role: "Game Logic & Physics",
       description:
@@ -70,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
       num: "03",
       name: "Numzy: Number Guesser",
       tech: "JavaScript / DOM Manipulation / CSS3",
-      image: "assets/Numzy.png",
+      image: "assets/Numzy.webp",
       year: "2026",
       role: "Concept & Logic",
       description:
@@ -89,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
       num: "04",
       name: "JEE Prep Console & Tracker",
       tech: "Modern CSS / Space Grotesk / LocalStorage / JS",
-      image: "assets/JEE.png",
+      image: "assets/JEE.webp",
       year: "2026",
       role: "Productivity System Design",
       description:
@@ -108,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
       num: "05",
       name: "Geo Weather",
       tech: "Weather API / JavaScript / Fetch / UI Testing",
-      image: "assets/geo.png",
+      image: "assets/geo.webp",
       year: "2026",
       role: "API Testing & Weather App",
       description:
@@ -127,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
       num: "06",
       name: "UNISWA Exports & Imports",
       tech: "Business Website / Company Profile / HTML / CSS / JS",
-      image: "assets/uniswa.png",
+      image: "assets/uniswa.webp",
       year: "2026",
       role: "Company Portfolio & Brand Presence",
       description:
@@ -772,6 +771,68 @@ I am currently working on connecting local Python microservices to my interactiv
   }, 4000);
 
   // ==========================================================================
+  // 6B. ABOUT SECTION TYPEWRITER EFFECT
+  // ==========================================================================
+  const TYPEWRITER_PHRASES = [
+    "Frontend Developer",
+    "Framework Explorer",
+    "Creative Coder",
+    "Problem Solver",
+    "Still Learning Every Day",
+  ];
+
+  const typewriterTextEl = document.getElementById("typewriterText");
+
+  function runTypewriter() {
+    if (!typewriterTextEl) return;
+
+    if (prefersReducedMotion) {
+      typewriterTextEl.textContent = TYPEWRITER_PHRASES[0];
+      return;
+    }
+
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    const typingSpeed = 70;
+    const deletingSpeed = 40;
+    const pauseAfterTyping = 1400;
+    const pauseAfterDeleting = 400;
+
+    function tick() {
+      const currentPhrase = TYPEWRITER_PHRASES[phraseIndex];
+
+      if (!isDeleting) {
+        charIndex++;
+        typewriterTextEl.textContent = currentPhrase.slice(0, charIndex);
+
+        if (charIndex === currentPhrase.length) {
+          isDeleting = true;
+          setTimeout(tick, pauseAfterTyping);
+          return;
+        }
+        setTimeout(tick, typingSpeed);
+      } else {
+        charIndex--;
+        typewriterTextEl.textContent = currentPhrase.slice(0, charIndex);
+
+        if (charIndex === 0) {
+          isDeleting = false;
+          phraseIndex = (phraseIndex + 1) % TYPEWRITER_PHRASES.length;
+          setTimeout(tick, pauseAfterDeleting);
+          return;
+        }
+        setTimeout(tick, deletingSpeed);
+      }
+    }
+
+    tick();
+  }
+
+  runTypewriter();
+
+  // ==========================================================================
   // 7. ULTRA-SMOOTH MOMENTUM CURSOR (Desktop Only)
   // ==========================================================================
   if (!isTouchDevice && !prefersReducedMotion && cursorDot && cursorCircle) {
@@ -869,12 +930,16 @@ I am currently working on connecting local Python microservices to my interactiv
         "[data-magnetic], .btn-get-in-touch, .hero-btn-primary, .hero-btn-secondary, .nav-cta-btn",
       )
       .forEach((el) => {
-        el.addEventListener("mousemove", (e) => {
-          const rect = el.getBoundingClientRect();
-          const dx = e.clientX - (rect.left + rect.width / 2);
-          const dy = e.clientY - (rect.top + rect.height / 2);
-          el.style.transform = `translate3d(${dx * 0.3}px, ${dy * 0.3}px, 0)`;
-        });
+        el.addEventListener(
+          "mousemove",
+          (e) => {
+            const rect = el.getBoundingClientRect();
+            const dx = e.clientX - (rect.left + rect.width / 2);
+            const dy = e.clientY - (rect.top + rect.height / 2);
+            el.style.transform = `translate3d(${dx * 0.3}px, ${dy * 0.3}px, 0)`;
+          },
+          { passive: true },
+        );
 
         el.addEventListener("mouseleave", () => {
           el.style.transform = "translate3d(0, 0, 0)";
@@ -897,12 +962,16 @@ I am currently working on connecting local Python microservices to my interactiv
       if (card.dataset.tiltBound) return;
       card.dataset.tiltBound = "true";
 
-      card.addEventListener("mousemove", (e) => {
-        const rect = card.getBoundingClientRect();
-        const rotateX = ((e.clientY - rect.top) / rect.height - 0.5) * -8;
-        const rotateY = ((e.clientX - rect.left) / rect.width - 0.5) * 8;
-        card.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
-      });
+      card.addEventListener(
+        "mousemove",
+        (e) => {
+          const rect = card.getBoundingClientRect();
+          const rotateX = ((e.clientY - rect.top) / rect.height - 0.5) * -8;
+          const rotateY = ((e.clientX - rect.left) / rect.width - 0.5) * 8;
+          card.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+        },
+        { passive: true },
+      );
 
       card.addEventListener("mouseleave", () => {
         card.style.transform =
@@ -951,11 +1020,15 @@ I am currently working on connecting local Python microservices to my interactiv
         }
       });
 
-      row.addEventListener("mousemove", (e) => {
-        if (projectPreview) {
-          projectPreview.style.transform = `translate3d(${e.clientX + 35}px, ${e.clientY - 120}px, 0)`;
-        }
-      });
+      row.addEventListener(
+        "mousemove",
+        (e) => {
+          if (projectPreview) {
+            projectPreview.style.transform = `translate3d(${e.clientX + 35}px, ${e.clientY - 120}px, 0)`;
+          }
+        },
+        { passive: true },
+      );
 
       row.addEventListener("mouseleave", () => {
         document.body.classList.remove("cursor-project");
