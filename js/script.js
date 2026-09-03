@@ -781,7 +781,16 @@ I am currently working on connecting local Python microservices to my interactiv
     "Still Learning Every Day",
   ];
 
+  const TYPEWRITER_COLORS = [
+    "var(--gold-accent)",
+    "var(--blue-accent)",
+    "#f28f79",
+    "#9bd6c8",
+    "#d7a7f9",
+  ];
+
   const typewriterTextEl = document.getElementById("typewriterText");
+  const typewriterCursorEl = document.getElementById("typewriterCursor");
 
   function runTypewriter() {
     if (!typewriterTextEl) return;
@@ -800,10 +809,19 @@ I am currently working on connecting local Python microservices to my interactiv
     const pauseAfterTyping = 1400;
     const pauseAfterDeleting = 400;
 
+    function setTypewriterColor() {
+      const color = TYPEWRITER_COLORS[phraseIndex];
+      typewriterTextEl.style.setProperty("--typewriter-color", color);
+      if (typewriterCursorEl) {
+        typewriterCursorEl.style.setProperty("--typewriter-color", color);
+      }
+    }
+
     function tick() {
       const currentPhrase = TYPEWRITER_PHRASES[phraseIndex];
 
       if (!isDeleting) {
+        if (charIndex === 0) setTypewriterColor();
         charIndex++;
         typewriterTextEl.textContent = currentPhrase.slice(0, charIndex);
 
