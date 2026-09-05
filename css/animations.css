@@ -1,0 +1,206 @@
+﻿/* ==========================================================================
+   23. AWARD-SITE MOTION LAYER
+   ========================================================================== */
+.about-statement em,
+.journey-title,
+.blog-card-title {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.85s var(--ease-out);
+}
+
+.about-statement em {
+  display: inline-block;
+}
+
+.about-statement.scroll-reveal.visible em,
+.scroll-reveal.visible .journey-title,
+.scroll-reveal.visible .blog-card-title {
+  clip-path: inset(0 0 0 0);
+}
+
+.skills-category,
+.blog-card,
+.journey-thanks {
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --lift: 0px;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transform: perspective(1000px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y))
+    translateY(var(--lift)) scale(var(--card-scale, 1));
+}
+
+.skills-category:hover,
+.blog-card:hover,
+.journey-thanks:hover {
+  transition:
+    transform 0.12s ease-out,
+    border-color 0.3s ease,
+    box-shadow 0.4s ease;
+}
+
+.footer-nav-link,
+.blog-read-link,
+.markdown-body a {
+  position: relative;
+  text-decoration: none;
+}
+
+.footer-nav-link::after,
+.blog-read-link::after,
+.markdown-body a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0.12rem;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s var(--ease-out);
+}
+
+.footer-nav-link:hover::after,
+.blog-read-link:hover::after,
+.markdown-body a:hover::after {
+  transform: scaleX(1);
+}
+
+.btn-sheen {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.btn-sheen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    110deg,
+    transparent 25%,
+    rgba(255, 255, 255, 0.28) 50%,
+    transparent 75%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.7s var(--ease-out);
+}
+
+.btn-sheen:hover::before {
+  transform: translateX(120%);
+}
+
+.hero-btn-primary:active,
+.hero-btn-secondary:active,
+.btn-get-in-touch:active,
+.nav-cta-btn:active {
+  transform: scale(0.96) !important;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.marquee-item {
+  transition:
+    transform 0.35s var(--ease-out),
+    color 0.35s ease;
+}
+
+.marquee-item:hover {
+  color: var(--text-primary);
+  transform: scale(1.04);
+}
+
+.image-reveal {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1s var(--ease-out);
+}
+
+.image-reveal.visible,
+.scroll-reveal.visible .image-reveal {
+  clip-path: inset(0 0 0% 0);
+}
+
+#skills,
+#work,
+#blogs,
+#contact {
+  isolation: isolate;
+}
+
+#work::before,
+#contact::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -5rem;
+  left: -10%;
+  width: 120%;
+  height: 10rem;
+  border-top: 1px solid var(--border-subtle);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  background: linear-gradient(180deg, transparent, var(--bg-elevated));
+  transform: scaleX(0.96);
+}
+
+@media (hover: none) {
+  .skills-category,
+  .blog-card,
+  .journey-thanks {
+    transform: none !important;
+    will-change: auto;
+  }
+}
+
+/* ==========================================================================
+   22. CUSTOM SCROLLBAR
+   ========================================================================== */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--gold-accent), var(--blue-accent));
+  border-radius: 100px;
+  border: 2px solid var(--bg-dark);
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--blue-accent), var(--gold-accent));
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--bg-dark);
+}
+
+.project-detail::-webkit-scrollbar,
+.blog-reader::-webkit-scrollbar {
+  width: 8px;
+}
+
+.project-detail::-webkit-scrollbar-track,
+.blog-reader::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.project-detail::-webkit-scrollbar-thumb,
+.blog-reader::-webkit-scrollbar-thumb {
+  background: var(--border-medium);
+  border-radius: 100px;
+}
+
+.project-detail::-webkit-scrollbar-thumb:hover,
+.blog-reader::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-accent);
+}

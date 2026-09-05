@@ -19,131 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
   "use strict";
 
   // ==========================================================================
-  // 1. DATA REPOSITORIES: PROJECTS
-  // ==========================================================================
-  /**
-   * List of showcased portfolio projects.
-   * Each entry contains full metadata, technical stack, problem-solution narrative, and links.
-   */
-  const PROJECTS = [
-    {
-      id: "zerodha",
-      num: "01",
-      name: "Zerodha Web Platform",
-      tech: "HTML5 / CSS3 Flexbox / Semantic Web",
-      image: "assets/zerodha.webp",
-      year: "2026",
-      role: "Frontend Development",
-      description:
-        "A pixel-perfect responsive recreation of the Zerodha stock trading and investing ecosystem landing page, built from scratch using clean CSS Flexbox, modern layout structuring, and responsive media queries.",
-      challenge:
-        "Structuring complex multi-column financial layouts, navigation dropdowns, and responsive pricing grids without layout reflow issues across varying viewport widths.",
-      solution:
-        "Leveraged CSS Flexbox with fluid scaling units, clean semantic HTML5 markup, and modern CSS variables for consistent spacing and design hierarchy.",
-      outcome:
-        "Pixel-perfect responsive replica with fast loading times, clean code architecture, and high cross-browser compatibility.",
-      liveUrl: "https://github.com/coconut-coder-rits",
-      githubUrl: "https://github.com/coconut-coder-rits",
-    },
-    {
-      id: "flappy-bird",
-      num: "02",
-      name: "Flappy Bird: Colorful Edition",
-      tech: "Vanilla JavaScript / Game Physics / CSS3",
-      image: "assets/flappy.webp",
-      year: "2026",
-      role: "Game Logic & Physics",
-      description:
-        "An arcade game rebuild of the classic Flappy Bird featuring custom gravity physics, procedural pipe generation, collision detection algorithms, animated jump velocity, and persistent local high score tracking.",
-      challenge:
-        "Maintaining consistent jump physics and collision boundaries at variable frame rates while keeping the game loop lightweight and responsive to spacebar and touch gestures.",
-      solution:
-        "Created a dedicated requestAnimationFrame game loop with delta-time velocity calculations, bounding-box hit detection, and custom CSS color grading.",
-      outcome:
-        "Addictive 60fps arcade gameplay with zero external dependencies and fluid response on both keyboard and touch devices.",
-      liveUrl: "https://github.com/coconut-coder-rits",
-      githubUrl: "https://github.com/coconut-coder-rits",
-    },
-    {
-      id: "numzy",
-      num: "03",
-      name: "Numzy: Number Guesser",
-      tech: "JavaScript / DOM Manipulation / CSS3",
-      image: "assets/Numzy.webp",
-      year: "2026",
-      role: "Concept & Logic",
-      description:
-        "An interactive logic game challenging players to deduce randomized numbers within dynamic attempt limits, featuring real-time directional feedback, attempt counters, and victory state animations.",
-      challenge:
-        "Handling edge-case input validation (negative numbers, non-numeric characters, duplicate guesses) while maintaining a clean, uninterrupted player state machine.",
-      solution:
-        "Implemented robust input sanitization, dynamic hint generation based on proximity distance, and DOM state updates.",
-      outcome:
-        "Fast, clean, and engaging mini-game with instant user feedback and intuitive UI.",
-      liveUrl: "https://github.com/coconut-coder-rits",
-      githubUrl: "https://github.com/coconut-coder-rits",
-    },
-    {
-      id: "jee-console",
-      num: "04",
-      name: "JEE Prep Console & Tracker",
-      tech: "Modern CSS / Space Grotesk / LocalStorage / JS",
-      image: "assets/JEE.webp",
-      year: "2026",
-      role: "Productivity System Design",
-      description:
-        "A high-density study console and syllabus mastery tracker engineered for JEE Advanced aspirants, with subject-wise analytics across Maths, Physics, and Chemistry, topic status tracking, and persistent state management.",
-      challenge:
-        "Managing large hierarchical topic state matrices with sub-topics, revision intervals, and priority tags without performance slowdowns.",
-      solution:
-        "Structured JSON schemas for syllabus tracking with LocalStorage persistence and reactive progress calculations.",
-      outcome:
-        "Focus-driven, high-contrast dark dashboard for daily study workflow and syllabus completion monitoring.",
-      liveUrl: "https://github.com/coconut-coder-rits",
-      githubUrl: "https://github.com/coconut-coder-rits",
-    },
-    {
-      id: "geo-weather",
-      num: "05",
-      name: "Geo Weather",
-      tech: "Weather API / JavaScript / Fetch / UI Testing",
-      image: "assets/geo.webp",
-      year: "2026",
-      role: "API Testing & Weather App",
-      description:
-        "A weather-focused API project built to test live weather data responses, UI states, and real-time request handling in a lightweight front-end workflow.",
-      challenge:
-        "Connecting to a weather API cleanly, handling asynchronous fetch responses, and validating loading, error, and successful data states without breaking the user experience.",
-      solution:
-        "Built a simple API-driven interface with structured fetch logic, condition-based rendering, and responsive states for different response outcomes.",
-      outcome:
-        "A clean testing app that demonstrates practical weather API integration and front-end validation workflows for real data-driven applications.",
-      liveUrl: "https://github.com/coconut-coder-rits",
-      githubUrl: "https://github.com/coconut-coder-rits",
-    },
-    {
-      id: "uniswa",
-      num: "06",
-      name: "UNISWA Exports & Imports",
-      tech: "Business Website / Company Profile / HTML / CSS / JS",
-      image: "assets/uniswa.webp",
-      year: "2026",
-      role: "Company Portfolio & Brand Presence",
-      description:
-        "A business-focused company profile for UNISWA, an exports and imports company, designed to present services, credibility, and the brand clearly to clients and partners.",
-      challenge:
-        "Building a polished company website that communicates trust, professionalism, and trade capability while keeping the experience clean and modern for business stakeholders.",
-      solution:
-        "Created a refined corporate landing experience with strong hierarchy, clear business messaging, and a straightforward interface suited for export-import branding.",
-      outcome:
-        "A professional, easy-to-navigate company site that reflects the UNISWA brand and supports business-facing communication.",
-      liveUrl: "https://github.com/coconut-coder-rits",
-      githubUrl: "https://github.com/coconut-coder-rits",
-    },
-  ];
-
-  // ==========================================================================
-  // 2. DATA REPOSITORIES: BLOGS & INSIGHTS
+  // 1. DATA REPOSITORIES: BLOGS & INSIGHTS
   // ==========================================================================
   /**
    * Articles and technical notes rendered via client-side Markdown.
@@ -286,8 +162,7 @@ I am currently working on connecting local Python microservices to my interactiv
     },
   ];
 
-  // Current Active Indices for Modal Pagination
-  let currentProjectIndex = 0;
+  // Current active index for article pagination
   let currentBlogIndex = 0;
   let previouslyFocusedElement = null;
 
@@ -535,24 +410,6 @@ I am currently working on connecting local Python microservices to my interactiv
   const mobileMenu = document.getElementById("mobileMenu");
   const themeToggle = document.getElementById("themeToggle");
   const footerToTop = document.getElementById("footerToTop");
-
-  // Projects DOM Elements
-  const projectList = document.getElementById("projectList");
-  const projectPreview = document.getElementById("projectPreview");
-  const projectPreviewImg = document.getElementById("projectPreviewImg");
-  const projectDetail = document.getElementById("projectDetail");
-  const projectDetailClose = document.getElementById("projectDetailClose");
-  const detailHeroImg = document.getElementById("detailHeroImg");
-  const detailTitle = document.getElementById("detailTitle");
-  const detailDesc = document.getElementById("detailDesc");
-  const detailMeta = document.getElementById("detailMeta");
-  const detailChallenge = document.getElementById("detailChallenge");
-  const detailSolution = document.getElementById("detailSolution");
-  const detailOutcome = document.getElementById("detailOutcome");
-  const detailLinks = document.getElementById("detailLinks");
-  const prevProject = document.getElementById("prevProject");
-  const nextProject = document.getElementById("nextProject");
-  const backToWork = document.getElementById("backToWork");
 
   // Blogs DOM Elements
   const blogsGrid = document.getElementById("blogsGrid");
@@ -860,8 +717,6 @@ I am currently working on connecting local Python microservices to my interactiv
       circleY = mouseY;
     let dotX = mouseX,
       dotY = mouseY;
-    let previewX = mouseX,
-      previewY = mouseY;
     let hasMovedMouse = false;
 
     window.addEventListener(
@@ -871,8 +726,8 @@ I am currently working on connecting local Python microservices to my interactiv
         mouseY = e.clientY;
         if (!hasMovedMouse) {
           hasMovedMouse = true;
-          dotX = circleX = previewX = mouseX;
-          dotY = circleY = previewY = mouseY;
+          dotX = circleX = mouseX;
+          dotY = circleY = mouseY;
           cursorDot.style.opacity = "1";
           cursorCircle.style.opacity = "1";
         }
@@ -904,13 +759,6 @@ I am currently working on connecting local Python microservices to my interactiv
 
         if (cursorViewText) {
           cursorViewText.style.transform = `translate3d(${circleX}px, ${circleY}px, 0) translate(-50%, -50%)`;
-        }
-
-        if (projectPreview && projectPreview.classList.contains("visible")) {
-          previewX += (mouseX - previewX) * 0.12;
-          previewY += (mouseY - previewY) * 0.12;
-          const tilt = Math.max(-10, Math.min(10, (mouseX - previewX) * 0.06));
-          projectPreview.style.transform = `translate3d(${previewX + 35}px, ${previewY - 120}px, 0) rotate(${tilt}deg)`;
         }
       }
       requestAnimationFrame(renderCursor);
@@ -1014,142 +862,7 @@ I am currently working on connecting local Python microservices to my interactiv
   }
 
   // ==========================================================================
-  // 9. RECENT WORK & PROJECT DETAIL MODAL
-  // ==========================================================================
-  function renderProjects() {
-    if (!projectList) return;
-
-    projectList.innerHTML = PROJECTS.map(
-      (p, idx) => `
-      <div class="project-row" data-project-index="${idx}" tabindex="0" role="button" aria-label="View project ${p.name}">
-        <span class="project-number">${p.num}</span>
-        <div class="project-info">
-          <h3 class="project-name">${p.name}</h3>
-        </div>
-        <span class="project-tech">${p.tech}</span>
-        <div class="project-view-btn">
-          <span>View</span>
-          <span class="arrow">→</span>
-        </div>
-      </div>
-    `,
-    ).join("");
-
-    projectList.querySelectorAll(".project-row").forEach((row) => {
-      const idx = parseInt(row.dataset.projectIndex, 10);
-      const project = PROJECTS[idx];
-
-      row.addEventListener("mouseenter", () => {
-        document.body.classList.add("cursor-project");
-        if (projectPreview && projectPreviewImg) {
-          projectPreviewImg.src = project.image;
-          projectPreviewImg.alt = project.name;
-          projectPreview.classList.add("visible");
-        }
-      });
-
-      row.addEventListener(
-        "mousemove",
-        (e) => {
-          if (projectPreview) {
-            projectPreview.style.transform = `translate3d(${e.clientX + 35}px, ${e.clientY - 120}px, 0)`;
-          }
-        },
-        { passive: true },
-      );
-
-      row.addEventListener("mouseleave", () => {
-        document.body.classList.remove("cursor-project");
-        if (projectPreview) projectPreview.classList.remove("visible");
-      });
-
-      row.addEventListener("click", () => openProjectDetail(idx));
-      row.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          openProjectDetail(idx);
-        }
-      });
-    });
-  }
-
-  renderProjects();
-
-  function openProjectDetail(index) {
-    currentProjectIndex = index;
-    const project = PROJECTS[index];
-    if (!project || !projectDetail) return;
-
-    document.body.classList.remove("cursor-project");
-    if (projectPreview) projectPreview.classList.remove("visible");
-
-    if (detailHeroImg) {
-      detailHeroImg.src = project.image;
-      detailHeroImg.alt = project.name;
-    }
-    if (detailTitle) detailTitle.textContent = project.name;
-    if (detailDesc) detailDesc.textContent = project.description;
-
-    if (detailMeta) {
-      detailMeta.innerHTML = `
-        <div><div class="project-meta-label">Year</div><div class="project-meta-value">${project.year}</div></div>
-        <div><div class="project-meta-label">Role</div><div class="project-meta-value">${project.role}</div></div>
-        <div><div class="project-meta-label">Technologies</div><div class="project-meta-value">${project.tech}</div></div>
-      `;
-    }
-
-    if (detailChallenge) detailChallenge.textContent = project.challenge;
-    if (detailSolution) detailSolution.textContent = project.solution;
-    if (detailOutcome) detailOutcome.textContent = project.outcome;
-
-    if (detailLinks) {
-      detailLinks.innerHTML = `
-        <a href="${project.liveUrl}" target="_blank" rel="noopener noreferrer" class="project-link" data-magnetic><span>Live Demo ↗</span></a>
-        <a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="project-link" data-magnetic><span>Source Code ↗</span></a>
-      `;
-      applyMagneticPhysics();
-    }
-
-    document.documentElement.classList.add("no-scroll");
-    projectDetail.classList.add("active");
-    projectDetail.scrollTop = 0;
-    trapFocus(projectDetail);
-  }
-
-  function closeProjectDetail() {
-    if (!projectDetail) return;
-    projectDetail.classList.remove("active");
-    document.documentElement.classList.remove("no-scroll");
-    releaseFocus(projectDetail);
-  }
-
-  if (projectDetailClose)
-    projectDetailClose.addEventListener("click", closeProjectDetail);
-  if (backToWork) {
-    backToWork.addEventListener("click", (e) => {
-      e.preventDefault();
-      closeProjectDetail();
-      const target = document.getElementById("work");
-      if (target) target.scrollIntoView({ behavior: "smooth" });
-    });
-  }
-
-  if (prevProject) {
-    prevProject.addEventListener("click", () => {
-      openProjectDetail(
-        (currentProjectIndex - 1 + PROJECTS.length) % PROJECTS.length,
-      );
-    });
-  }
-
-  if (nextProject) {
-    nextProject.addEventListener("click", () => {
-      openProjectDetail((currentProjectIndex + 1) % PROJECTS.length);
-    });
-  }
-
-  // ==========================================================================
-  // 10. ASTRO-GRADE CLIENT-SIDE MARKDOWN PARSER
+  // 9. ASTRO-GRADE CLIENT-SIDE MARKDOWN PARSER
   // ==========================================================================
   /**
    * Converts markdown text into structured semantic HTML with syntax wrappers.
@@ -1224,11 +937,11 @@ I am currently working on connecting local Python microservices to my interactiv
 
     blogsGrid.innerHTML = BLOGS.map(
       (blog, idx) => `
-      <article class="blog-card scroll-reveal sr-delay-${idx + 1}" data-scroll-reveal data-blog-index="${idx}" tabindex="0" role="button" aria-label="Read article: ${blog.title}">
-        <div>
+      <article class="blog-card scroll-reveal sr-delay-${idx + 1}" data-scroll-reveal data-blog-index="${idx}" data-category="${blog.tag.toLowerCase().replace(/[^a-z0-9]+/g, "-")}" tabindex="0" role="button" aria-label="Read article: ${blog.title}">
+        <div class="blog-card-content">
           <div class="blog-card-top">
-            <span class="blog-tag">${blog.tag}</span>
-            <span class="blog-reading-time">${blog.readTime}</span>
+            <span class="blog-tag"><span class="blog-tag-icon" aria-hidden="true">✦</span>${blog.tag}</span>
+            <span class="blog-reading-time"><span aria-hidden="true">◷</span>${blog.readTime}</span>
           </div>
           <h3 class="blog-card-title">${blog.title}</h3>
           <p class="blog-card-excerpt">${blog.excerpt}</p>
@@ -1246,7 +959,14 @@ I am currently working on connecting local Python microservices to my interactiv
 
     blogsGrid.querySelectorAll(".blog-card").forEach((card) => {
       const idx = parseInt(card.dataset.blogIndex, 10);
-      card.addEventListener("click", () => openBlogReader(idx));
+      card.addEventListener("click", (event) => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty("--ripple-x", `${event.clientX - rect.left}px`);
+        card.style.setProperty("--ripple-y", `${event.clientY - rect.top}px`);
+        card.classList.remove("is-rippling");
+        requestAnimationFrame(() => card.classList.add("is-rippling"));
+        openBlogReader(idx);
+      });
       card.addEventListener("keydown", (e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
@@ -1415,9 +1135,7 @@ I am currently working on connecting local Python microservices to my interactiv
       });
 
     document
-      .querySelectorAll(
-        ".contact-avatar-pill, .project-detail img, .blog-reader img",
-      )
+      .querySelectorAll(".contact-avatar-pill, .blog-reader img")
       .forEach((image) => image.classList.add("image-reveal"));
 
     document
@@ -1507,8 +1225,6 @@ I am currently working on connecting local Python microservices to my interactiv
   // Keyboard shortcut: Escape to close active dialogs
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-      if (projectDetail && projectDetail.classList.contains("active"))
-        closeProjectDetail();
       if (blogReader && blogReader.classList.contains("active"))
         closeBlogReader();
       if (mobileMenu && mobileMenu.classList.contains("active")) {

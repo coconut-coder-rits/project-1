@@ -1,0 +1,291 @@
+﻿/* ==========================================================================
+   17. PREMIUM FOOTER
+   ========================================================================== */
+
+.footer {
+  position: relative;
+  padding: clamp(4.5rem, 9vw, 7.5rem) clamp(1.5rem, 5vw, 4rem)
+    clamp(2rem, 4vw, 2.5rem);
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-subtle);
+  max-width: 1500px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.footer-glow {
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 420px;
+  background: radial-gradient(
+    ellipse at center,
+    var(--blue-glow) 0%,
+    transparent 70%
+  );
+  opacity: 0.5;
+  pointer-events: none;
+  filter: blur(40px);
+}
+
+.footer-main {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.8fr 1fr 1fr;
+  gap: clamp(2.5rem, 5vw, 5rem);
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.footer-eyebrow {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--blue-accent);
+  margin-bottom: 1rem;
+}
+
+.footer-statement {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 3.6vw, 2.9rem);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  max-width: 460px;
+}
+
+.footer-status {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-col-title {
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.footer-nav-link {
+  position: relative;
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  padding: 0.45rem 0;
+  transition:
+    transform 0.3s var(--ease-out),
+    color 0.3s ease;
+}
+
+.footer-nav-link:hover {
+  color: var(--text-primary);
+  transition:
+    transform 0.3s var(--ease-out),
+    color 0.3s ease;
+  animation: footerLinkLift 0.35s var(--ease-out) forwards;
+}
+
+/* Custom Scroll Progress Bar */
+.scroll-progress-track {
+  position: fixed;
+  top: 0;
+  right: 0.55rem;
+  width: 0.25rem;
+  height: 100vh;
+  display: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 0 0 1px var(--border-subtle);
+  z-index: 9999;
+  pointer-events: auto;
+  transition:
+    opacity 0.25s var(--ease-out),
+    width 0.25s var(--ease-out),
+    background 0.3s var(--ease-out);
+}
+
+.scroll-progress-track.is-visible {
+  display: block;
+}
+
+.scroll-progress-track.is-active {
+  width: 0.5rem;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.scroll-progress-thumb {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 0.5rem;
+  height: 48px;
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    var(--gold-accent) 0%,
+    var(--blue-accent) 100%
+  );
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+  transform: translate(-50%, 0);
+  transition:
+    width 0.25s var(--ease-out),
+    height 0.25s var(--ease-out),
+    box-shadow 0.3s var(--ease-out),
+    opacity 0.25s var(--ease-out),
+    transform 0.15s var(--ease-out);
+}
+
+.scroll-progress-thumb.is-active,
+.scroll-progress-track:hover .scroll-progress-thumb {
+  width: 0.7rem;
+  box-shadow:
+    0 0 18px rgba(79, 104, 255, 0.48),
+    0 0 32px var(--blue-glow);
+}
+
+html[data-theme="light"] .scroll-progress-track {
+  background: rgba(17, 21, 30, 0.06);
+}
+
+@media (hover: none) {
+  .scroll-progress-track {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress-track,
+  .scroll-progress-thumb {
+    transition: none;
+  }
+
+  .scroll-progress-thumb.is-active,
+  .scroll-progress-track:hover .scroll-progress-thumb {
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Oversized Signature Wordmark */
+.footer-wordmark-wrap {
+  position: relative;
+  padding: clamp(2.5rem, 6vw, 4.5rem) 0 clamp(1.5rem, 3vw, 2rem);
+  overflow: hidden;
+  text-align: center;
+}
+
+.footer-wordmark {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 13vw, 11rem);
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  line-height: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  user-select: none;
+  transition: background 0.6s ease;
+}
+
+html[data-theme="light"] .footer-wordmark {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(0, 0, 0, 0.02) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.footer-bottom {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  padding-top: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+
+.footer-copy,
+.footer-built {
+  font-size: 0.75rem;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+.footer-to-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: none;
+  border: none;
+  padding: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  transition: color 0.25s ease;
+}
+
+.footer-to-top-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border-light);
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s var(--ease-spring);
+}
+
+.footer-to-top-arrow {
+  display: inline-block;
+  font-size: 0.95rem;
+  transition: transform 0.35s var(--ease-out);
+}
+
+.footer-to-top:hover {
+  color: var(--text-primary);
+}
+
+.footer-to-top:hover .footer-to-top-circle {
+  background: var(--blue-accent);
+  border-color: var(--blue-accent);
+  transform: scale(1.08);
+  box-shadow: 0 8px 24px var(--blue-glow);
+}
+
+.footer-to-top:hover .footer-to-top-arrow {
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+
+/* ==========================================================================

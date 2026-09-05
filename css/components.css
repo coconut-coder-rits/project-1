@@ -1,0 +1,268 @@
+﻿/* ==========================================================================
+   4. CUSTOM MOMENTUM CURSOR (Desktop Non-Touch Only)
+   ========================================================================== */
+.cursor-dot,
+.cursor-circle,
+.cursor-view-text {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cursor-dot {
+  width: 7px;
+  height: 7px;
+  background-color: #ffffff;
+  border-radius: 50%;
+}
+
+.cursor-circle {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  transition:
+    width 0.3s var(--ease-out),
+    height 0.3s var(--ease-out),
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.cursor-view-text {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #ffffff;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* Cursor Interactive States */
+body.cursor-hover .cursor-circle {
+  width: 60px;
+  height: 60px;
+  border-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+body.cursor-project .cursor-circle {
+  width: 88px;
+  height: 88px;
+  background-color: var(--blue-accent);
+  border-color: var(--blue-accent);
+  box-shadow: 0 0 35px var(--blue-glow);
+}
+
+body.cursor-project .cursor-dot {
+  opacity: 0 !important;
+}
+
+body.cursor-project .cursor-view-text {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   5. PRELOADER & GREETINGS TICKER
+   ========================================================================== */
+.loader {
+  position: fixed;
+  inset: 0;
+  background-color: #050507;
+  overflow: hidden;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform 0.85s cubic-bezier(0.76, 0, 0.24, 1),
+    opacity 0.5s ease;
+}
+
+.loader-gradient,
+.loader-orb {
+  position: absolute;
+  pointer-events: none;
+}
+
+.loader-gradient {
+  inset: -25%;
+  z-index: 0;
+  background:
+    radial-gradient(
+      circle at 18% 22%,
+      rgba(231, 204, 160, 0.34),
+      transparent 27%
+    ),
+    radial-gradient(
+      circle at 82% 74%,
+      rgba(79, 104, 255, 0.42),
+      transparent 32%
+    ),
+    linear-gradient(125deg, #050507 12%, #141329 48%, #211b19 78%, #050507 100%);
+  background-size:
+    135% 135%,
+    125% 125%,
+    240% 240%;
+  animation: loaderGradientShift 10s ease-in-out infinite alternate;
+}
+
+.loader-orb {
+  z-index: 0;
+  width: min(42vw, 520px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.5;
+  mix-blend-mode: screen;
+}
+
+.loader-orb-gold {
+  top: -18%;
+  left: 8%;
+  background: rgba(231, 204, 160, 0.58);
+  animation: loaderGoldOrb 7s ease-in-out infinite alternate;
+}
+
+.loader-orb-blue {
+  right: 4%;
+  bottom: -24%;
+  background: rgba(79, 104, 255, 0.62);
+  animation: loaderBlueOrb 8s ease-in-out infinite alternate;
+}
+
+@keyframes loaderGradientShift {
+  from {
+    transform: translate3d(-4%, -2%, 0) scale(1);
+    filter: hue-rotate(0deg) saturate(1);
+  }
+  to {
+    transform: translate3d(4%, 3%, 0) scale(1.08);
+    filter: hue-rotate(18deg) saturate(1.2);
+  }
+}
+
+@keyframes loaderGoldOrb {
+  from {
+    transform: translate3d(-8%, -4%, 0) scale(0.82);
+  }
+  to {
+    transform: translate3d(26%, 22%, 0) scale(1.16);
+  }
+}
+
+@keyframes loaderBlueOrb {
+  from {
+    transform: translate3d(12%, 6%, 0) scale(0.88);
+  }
+  to {
+    transform: translate3d(-24%, -18%, 0) scale(1.18);
+  }
+}
+
+.loader.exit {
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+.loader-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 420px;
+  width: 90%;
+}
+
+.loader-glow {
+  position: absolute;
+  z-index: 0;
+  width: min(70vw, 620px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(231, 204, 160, 0.5) 0%,
+    rgba(79, 104, 255, 0.22) 38%,
+    transparent 72%
+  );
+  filter: blur(35px);
+  opacity: 0.65;
+  animation: loaderGlowPulse 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes loaderGlowPulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.08);
+  }
+}
+
+.loader-counter {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--gold-accent);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.loader-greeting {
+  height: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.loader-word {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 5rem);
+  line-height: 1.2;
+  font-weight: 400;
+  color: #ffffff;
+  letter-spacing: 0.05em;
+  animation: loaderWordEntrance 280ms var(--ease-spring) both;
+}
+
+@keyframes loaderWordEntrance {
+  from {
+    scale: 0.82;
+    filter: blur(10px);
+  }
+  to {
+    scale: 1;
+    filter: blur(0);
+  }
+}
+
+.loader-progress {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loader-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--gold-accent), #ffffff);
+  transition: width 0.28s linear;
+}
+
+/* =================================

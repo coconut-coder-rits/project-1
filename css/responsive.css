@@ -1,0 +1,215 @@
+﻿/* ==========================================================================
+   18. SCROLL REVEALS & ANIMATIONS
+   ========================================================================== */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.8s var(--ease-out),
+    transform 0.8s var(--ease-out);
+}
+
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sr-delay-1 {
+  transition-delay: 0.1s;
+}
+
+.sr-delay-2 {
+  transition-delay: 0.2s;
+}
+
+.sr-delay-3 {
+  transition-delay: 0.3s;
+}
+
+.sr-delay-4 {
+  transition-delay: 0.4s;
+}
+
+.reveal-text {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.7s var(--ease-out),
+    transform 0.7s var(--ease-out);
+}
+
+.reveal-text.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.heading-word {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(28px);
+  letter-spacing: 0.02em;
+  transition:
+    opacity 0.65s var(--ease-out),
+    filter 0.75s var(--ease-out),
+    transform 0.75s var(--ease-out),
+    letter-spacing 0.75s var(--ease-out);
+}
+
+.scroll-reveal.visible .heading-word {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+  letter-spacing: 0;
+}
+
+.heading-word + .heading-word {
+  margin-left: 0.24em;
+}
+
+.heading-word:nth-child(2) {
+  transition-delay: 0.12s;
+}
+.heading-word:nth-child(3) {
+  transition-delay: 0.24s;
+}
+
+/* ==========================================================================
+   19. RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .nav-links {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .project-row {
+    grid-template-columns: 50px 1fr 90px;
+  }
+
+  .project-tech {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .footer-main {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-brand-col {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-bottom-bar {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .hero-bottom-spacer {
+    display: none;
+  }
+
+  .contact-action-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-main {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-wordmark {
+    font-size: clamp(2.5rem, 15vw, 5rem);
+  }
+}
+
+/* ==========================================================================
+   20. ACCESSIBILITY: PREFERS REDUCED MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .marquee-track {
+    animation: none;
+  }
+
+  .scroll-reveal,
+  .reveal-text,
+  .heading-word,
+  .about-statement em,
+  .journey-title,
+  .blog-card-title,
+  .image-reveal {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+    clip-path: inset(0 0 0 0) !important;
+    letter-spacing: 0 !important;
+  }
+
+  .site-grain,
+  .loader-glow,
+  .loader-gradient,
+  .loader-orb {
+    animation: none;
+  }
+
+  .loader-word {
+    animation: none;
+    scale: 1;
+    filter: none;
+  }
+
+  .footer-nav-link::after,
+  .blog-read-link::after,
+  .markdown-body a::after {
+    transform: scaleX(1) !important;
+    transition: none !important;
+  }
+
+  .btn-sheen::before {
+    transform: translateX(0) !important;
+    transition: none !important;
+  }
+
+  .marquee-item {
+    transform: none !important;
+  }
+
+  .typewriter-cursor {
+    animation: none;
+    opacity: 1;
+  }
+
+  .typewriter-text,
+  .typewriter-cursor {
+    transition: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+}
+
+@media (max-width: 600px) {
+}
+
+/* ==========================================================================
