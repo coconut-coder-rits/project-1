@@ -12,6 +12,8 @@
       content="Ritvik Varma, 14-year-old developer from Visakhapatnam, India. I build websites, experiments, creative motion physics, and interactive experiences for the web."
     />
     <meta name="author" content="Ritvik Varma" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
     <meta name="theme-color" content="#0a0a0d" />
     <link rel="canonical" href="https://ritvikvarma.dev/" />
 
@@ -26,7 +28,15 @@
       property="og:description"
       content="14-year-old developer building websites, experiments, and interactive web experiences with creative motion."
     />
-    <meta property="og:image" content="assets/image.webp" />
+    <meta
+      property="og:image"
+      content="https://ritvikvarma.dev/assets/image.webp"
+    />
+    <meta
+      property="og:image:alt"
+      content="Ritvik Varma, developer and creative coder"
+    />
+    <meta property="og:locale" content="en_IN" />
     <meta property="og:site_name" content="Ritvik Varma Portfolio" />
 
     <!-- Twitter Card Metadata -->
@@ -39,7 +49,32 @@
       name="twitter:description"
       content="14-year-old developer building websites, experiments, and interactive web experiences with creative motion."
     />
-    <meta name="twitter:image" content="assets/image.webp" />
+    <meta
+      name="twitter:image"
+      content="https://ritvikvarma.dev/assets/image.webp"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="Ritvik Varma, developer and creative coder"
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Ritvik Varma",
+        "url": "https://ritvikvarma.dev/",
+        "jobTitle": "Developer and Creative Coder",
+        "description": "Ritvik Varma is a developer and creative coder from Visakhapatnam, India, building websites, experiments, and interactive web experiences.",
+        "image": "https://ritvikvarma.dev/assets/image.webp",
+        "sameAs": ["https://github.com/coconut-coder-rits"],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Visakhapatnam",
+          "addressCountry": "IN"
+        }
+      }
+    </script>
 
     <!-- Favicon (Inline SVG Monogram Badge) -->
     <link
@@ -114,8 +149,8 @@
     <!-- ==========================================
      HEADER NAVIGATION (Glass Capsule)
      ========================================== -->
-    <nav class="nav" id="nav" aria-label="Main Navigation">
-      <div class="nav-inner">
+    <header class="nav" id="nav">
+      <nav class="nav-inner" aria-label="Primary navigation">
         <div class="nav-left">
           <!-- Theme Toggle Button -->
           <button
@@ -224,8 +259,8 @@
             <span></span>
           </button>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
 
     <!-- ==========================================
      MOBILE NAVIGATION DRAWER
@@ -247,7 +282,7 @@
      ========================================== -->
     <main id="main">
       <!-- 1. HERO SECTION -->
-      <section class="hero" id="top">
+      <section class="hero" id="top" aria-labelledby="hero-title">
         <div class="hero-bg-media" aria-hidden="true"></div>
         <div class="hero-bg-overlay" aria-hidden="true"></div>
 
@@ -278,7 +313,7 @@
           </div>
 
           <div class="hero-title">
-            <h1 class="reveal-text" data-reveal>
+            <h1 class="reveal-text" data-reveal id="hero-title">
               <span class="hero-name-first">RITVIK</span>
               <span class="hero-name-last">VARMA</span>
             </h1>
@@ -455,8 +490,8 @@
       </div>
 
       <!-- 3. ABOUT SECTION -->
-      <section class="section" id="about">
-        <div class="section-label">01 / Who I Am</div>
+      <section class="section" id="about" aria-labelledby="about-title">
+        <h2 class="section-label" id="about-title">01 / Who I Am</h2>
 
         <div class="about-content">
           <p class="about-statement scroll-reveal" data-scroll-reveal>
@@ -478,49 +513,49 @@
             ></span>
           </div>
 
-          <div class="about-details">
+          <dl class="about-details">
             <div
               class="about-detail-item scroll-reveal sr-delay-1"
               data-scroll-reveal
             >
-              <div class="about-detail-label">Based In</div>
-              <div class="about-detail-value">Visakhapatnam, India</div>
+              <dt class="about-detail-label">Based In</dt>
+              <dd class="about-detail-value">Visakhapatnam, India</dd>
             </div>
             <div
               class="about-detail-item scroll-reveal sr-delay-2"
               data-scroll-reveal
             >
-              <div class="about-detail-label">Currently Learning</div>
-              <div class="about-detail-value">React, Node.js &amp; APIs</div>
+              <dt class="about-detail-label">Currently Learning</dt>
+              <dd class="about-detail-value">React, Node.js &amp; APIs</dd>
             </div>
             <div
               class="about-detail-item scroll-reveal sr-delay-3"
               data-scroll-reveal
             >
-              <div class="about-detail-label">Interests</div>
-              <div class="about-detail-value">
+              <dt class="about-detail-label">Interests</dt>
+              <dd class="about-detail-value">
                 Creative motion , GSAP, &amp; AI
-              </div>
+              </dd>
             </div>
             <div
               class="about-detail-item scroll-reveal sr-delay-4"
               data-scroll-reveal
             >
-              <div class="about-detail-label">Status</div>
-              <div class="about-detail-value">
+              <dt class="about-detail-label">Status</dt>
+              <dd class="about-detail-value">
                 Open to small projects &amp; collabs
-              </div>
+              </dd>
             </div>
-          </div>
+          </dl>
         </div>
       </section>
 
       <!-- 4. SKILLS SECTION -->
-      <section class="section" id="skills">
-        <div class="section-label">02 / Skills &amp; Tools</div>
+      <section class="section" id="skills" aria-labelledby="skills-title">
+        <h2 class="section-label" id="skills-title">02 / Skills &amp; Tools</h2>
 
         <div class="skills-grid">
-          <div
+          <article
             class="skills-category scroll-reveal sr-delay-1"
             data-scroll-reveal
           >
@@ -542,9 +577,9 @@
             <div class="skill-item">
               <span>Bootstrap</span><span class="skill-badge">Layout</span>
             </div>
-          </div>
+          </article>
 
-          <div
+          <article
             class="skills-category scroll-reveal sr-delay-2"
             data-scroll-reveal
           >
@@ -557,9 +592,9 @@
               <span>Python</span
               ><span class="skill-badge">APIs &amp; Logic</span>
             </div>
-          </div>
+          </article>
 
-          <div
+          <article
             class="skills-category scroll-reveal sr-delay-3"
             data-scroll-reveal
           >
@@ -575,15 +610,19 @@
               <span>Astro / Markdown</span
               ><span class="skill-badge">Content</span>
             </div>
-          </div>
+          </article>
         </div>
       </section>
 
       <!-- 5. RECENT WORK SECTION -->
-      <section class="section" id="work">
+      <section class="section" id="work" aria-labelledby="work-title">
         <div class="work-header">
           <div>
-            <h2 class="work-title scroll-reveal" data-scroll-reveal>
+            <h2
+              class="work-title scroll-reveal"
+              data-scroll-reveal
+              id="work-title"
+            >
               <span class="heading-word">Recent</span>
               <span class="heading-word">Work</span>
             </h2>
@@ -608,8 +647,8 @@
       </section>
 
       <!-- 6. JOURNEY & MENTORSHIP TIMELINE -->
-      <section class="section" id="journey">
-        <div class="section-label">03 / My Journey</div>
+      <section class="section" id="journey" aria-labelledby="journey-title">
+        <h2 class="section-label" id="journey-title">03 / My Journey</h2>
 
         <div class="journey-timeline">
           <div class="journey-item scroll-reveal sr-delay-1" data-scroll-reveal>
@@ -670,11 +709,17 @@
       </section>
 
       <!-- 7. BLOGS & INSIGHTS SECTION -->
-      <section class="section" id="blogs">
-        <div class="section-label">04 / Writing &amp; Insights</div>
+      <section class="section" id="blogs" aria-labelledby="blogs-title">
+        <h2 class="section-label" id="blogs-section-title">
+          04 / Writing &amp; Insights
+        </h2>
         <div class="blogs-header">
           <div>
-            <h2 class="blogs-title scroll-reveal" data-scroll-reveal>
+            <h2
+              class="blogs-title scroll-reveal"
+              data-scroll-reveal
+              id="blogs-title"
+            >
               <span class="heading-word">Articles</span>
               <span class="heading-word">&amp;</span>
               <span class="heading-word">Notes</span>
@@ -701,7 +746,7 @@
       </section>
 
       <!-- 8. CONTACT SECTION -->
-      <section class="contact" id="contact">
+      <section class="contact" id="contact" aria-labelledby="contact-title">
         <div class="contact-inner">
           <div class="contact-header-top scroll-reveal" data-scroll-reveal>
             <div class="contact-avatar-pill">
@@ -714,7 +759,7 @@
                 decoding="async"
               />
             </div>
-            <h2 class="contact-heading-main">
+            <h2 class="contact-heading-main" id="contact-title">
               <span class="heading-word">Let's</span>
               <span class="heading-word">work</span><br />
               <span class="heading-word">together</span>
@@ -782,15 +827,15 @@
     <!-- ==========================================
      PREMIUM FOOTER
      ========================================== -->
-    <footer class="footer">
+    <footer class="footer" aria-labelledby="footer-title">
       <div class="footer-glow" aria-hidden="true"></div>
 
       <div class="footer-main">
         <div class="footer-col footer-brand-col">
           <span class="footer-eyebrow">Currently</span>
-          <h3 class="footer-statement">
+          <h2 class="footer-statement" id="footer-title">
             Building things,<br />one idea at a time.
-          </h3>
+          </h2>
           <span class="footer-status">
             <span class="status-dot"></span>Available for small projects
           </span>
@@ -876,6 +921,7 @@
       role="dialog"
       aria-modal="true"
       aria-labelledby="detailTitle"
+      aria-describedby="detailDesc"
       aria-hidden="true"
     >
       <button
@@ -944,7 +990,7 @@
       id="blogReader"
       role="dialog"
       aria-modal="true"
-      aria-label="Article Reader"
+      aria-labelledby="blogReaderTitle"
       aria-hidden="true"
     >
       <div class="blog-reader-progress-track">

@@ -165,7 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 ## The Inspiration
 
-When I first encountered 's portfolio](https://dennissnellenberg.com/), I was blown away by the level of craft, tactile feedback, and physics-driven micro-interactions. The smooth momentum cursor, the magnetic pull on buttons, and the seamless transition between dark and light themes felt completely alive.
+When I first encountered 's portfolio dennissnellenberg.com , I was blown away by the level of craft, tactile feedback, and physics-driven micro-interactions. The smooth momentum cursor, the magnetic pull on buttons, and the seamless transition between dark and light themes felt completely alive.
 
 At 14 years old, having started coding only a year ago, I challenged myself to reverse-engineer and build this entire experience from scratch using **pure Vanilla JavaScript and CSS3 transforms** — without relying on heavy third-party animation libraries like GSAP or Three.js.
 
