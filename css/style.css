@@ -920,6 +920,14 @@ html[data-theme="light"] .hero-bg-overlay {
   border: 1px solid var(--border-subtle);
 }
 
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold-accent);
+  animation: pulseDot 2s ease-in-out infinite;
+}
+
 @keyframes pulseDot {
   0%,
   100% {
@@ -1016,7 +1024,6 @@ html[data-theme="light"] .hero-bg-overlay {
 
 .hero-btn-secondary:hover {
   border-color: var(--border-hover);
-  transform: scale(1.04);
 }
 
 .hero-bottom-bar {
@@ -1293,57 +1300,152 @@ html[data-theme="light"] .hero-bg-overlay {
    ========================================================================== */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 1.35rem;
+  align-items: stretch;
 }
 
 .skills-category {
+  --card-accent: var(--blue-accent);
+  --card-accent-soft: rgba(79, 104, 255, 0.14);
+  --card-glow: rgba(79, 104, 255, 0.2);
   position: relative;
-  background: var(--bg-elevated);
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.02),
+      rgba(255, 255, 255, 0.01)
+    ),
+    var(--bg-elevated);
   border: 1px solid var(--border-subtle);
-  border-radius: 20px;
-  padding: 2.2rem;
+  border-radius: 22px;
+  padding: 1.7rem 1.4rem 1.2rem;
   overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
   transition:
     transform 0.4s var(--ease-out),
     border-color 0.3s ease,
-    box-shadow 0.4s ease;
+    box-shadow 0.4s ease,
+    background 0.35s ease;
+}
+
+.skills-category:nth-child(1) {
+  --card-accent: var(--blue-accent);
+  --card-accent-soft: rgba(79, 104, 255, 0.14);
+  --card-glow: rgba(79, 104, 255, 0.2);
+}
+
+.skills-category:nth-child(2) {
+  --card-accent: var(--gold-accent);
+  --card-accent-soft: rgba(231, 204, 160, 0.14);
+  --card-glow: rgba(231, 204, 160, 0.2);
+}
+
+.skills-category:nth-child(3) {
+  --card-accent: #7dd3fc;
+  --card-accent-soft: rgba(125, 211, 252, 0.14);
+  --card-glow: rgba(125, 211, 252, 0.2);
 }
 
 .skills-category:hover {
-  border-color: var(--border-hover);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--card-accent) 35%, var(--border-hover));
+  box-shadow:
+    0 14px 32px rgba(0, 0, 0, 0.26),
+    0 0 0 1px rgba(255, 255, 255, 0.02),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .skills-category h3 {
+  position: relative;
+  z-index: 1;
   font-family: var(--font-display);
   font-size: 1.35rem;
   font-weight: 500;
   color: var(--text-primary);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
+  letter-spacing: -0.02em;
 }
 
 .skill-item {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.85rem 0;
-  border-bottom: 1px solid var(--border-subtle);
+  gap: 1rem;
+  padding: 0.82rem 0.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   font-size: 0.95rem;
   color: var(--text-secondary);
+  transition:
+    transform 0.25s var(--ease-out),
+    color 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+.skill-item:hover {
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.01);
 }
 
 .skill-item:last-child {
   border-bottom: none;
 }
 
+.skill-item:first-of-type {
+  padding-top: 0.3rem;
+}
+
 .skill-badge {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3.1rem;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
-  padding: 0.2rem 0.6rem;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-muted);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.32rem 0.55rem;
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.02)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+}
+
+.skills-category:nth-child(1) .skill-badge {
+  background: linear-gradient(
+    180deg,
+    rgba(79, 104, 255, 0.18),
+    rgba(79, 104, 255, 0.08)
+  );
+}
+
+.skills-category:nth-child(2) .skill-badge {
+  background: linear-gradient(
+    180deg,
+    rgba(231, 204, 160, 0.18),
+    rgba(231, 204, 160, 0.08)
+  );
+}
+
+.skills-category:nth-child(3) .skill-badge {
+  background: linear-gradient(
+    180deg,
+    rgba(125, 211, 252, 0.18),
+    rgba(125, 211, 252, 0.08)
+  );
 }
 
 /* ==========================================================================
@@ -1493,6 +1595,7 @@ html[data-theme="light"] .hero-bg-overlay {
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.55);
   border: 1px solid var(--border-medium);
   transition: opacity 0.3s ease;
+  background: rgba(12, 14, 20, 0.6);
 }
 
 .project-preview.visible {
@@ -1503,6 +1606,17 @@ html[data-theme="light"] .hero-bg-overlay {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
+  transform: scale(1.02);
+  transform-origin: center;
+  transition:
+    transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.3s ease;
+  filter: saturate(1.04) contrast(1.02);
+}
+
+.project-preview.visible img {
+  transform: scale(1.08);
 }
 
 /* ==========================================================================
@@ -1601,7 +1715,6 @@ html[data-theme="light"] .hero-bg-overlay {
 
 .journey-thanks:hover {
   border-color: var(--border-hover);
-  transform: translateY(-4px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
 }
 
@@ -1734,6 +1847,8 @@ html[data-theme="light"] .hero-bg-overlay {
 
 .project-detail,
 .blog-reader {
+  position: fixed;
+  inset: 0;
   background: var(--bg-dark);
   z-index: 2000;
   overflow-y: auto;
@@ -2203,6 +2318,7 @@ html[data-theme="light"] .markdown-body code {
 /* ==========================================================================
    17. PREMIUM FOOTER
    ========================================================================== */
+
 .footer {
   position: relative;
   padding: clamp(4.5rem, 9vw, 7.5rem) clamp(1.5rem, 5vw, 4rem)
@@ -2726,8 +2842,14 @@ html[data-theme="light"] .footer-wordmark {
 .skills-category,
 .blog-card,
 .journey-thanks {
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --lift: 0px;
+  perspective: 1000px;
   transform-style: preserve-3d;
   will-change: transform;
+  transform: perspective(1000px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y))
+    translateY(var(--lift));
 }
 
 .skills-category:hover,

@@ -782,11 +782,11 @@ I am currently working on connecting local Python microservices to my interactiv
   ];
 
   const TYPEWRITER_COLORS = [
-    "var(--gold-accent)",
-    "var(--blue-accent)",
     "#f28f79",
-    "#9bd6c8",
-    "#d7a7f9",
+    "#9c2fb7",
+    "#f15c3b",
+    "#13d0a4",
+    "#9b4ed2",
   ];
 
   const typewriterTextEl = document.getElementById("typewriterText");
@@ -977,29 +977,39 @@ I am currently working on connecting local Python microservices to my interactiv
     if (isTouchDevice || prefersReducedMotion) return;
 
     document.querySelectorAll(selector).forEach((card) => {
-      if (card.dataset.tiltBound) return;
+      if (card.dataset.tiltBound === "true") return;
       card.dataset.tiltBound = "true";
+
+      const resetTilt = () => {
+        card.style.setProperty("--tilt-x", "0deg");
+        card.style.setProperty("--tilt-y", "0deg");
+        card.style.setProperty("--lift", "0px");
+        card.style.transition =
+          "transform 0.55s var(--ease-spring), border-color 0.3s ease, box-shadow 0.4s ease";
+      };
 
       card.addEventListener(
         "mousemove",
         (e) => {
           const rect = card.getBoundingClientRect();
-          const rotateX = ((e.clientY - rect.top) / rect.height - 0.5) * -8;
-          const rotateY = ((e.clientX - rect.left) / rect.width - 0.5) * 8;
-          card.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+          const offsetX = (e.clientX - rect.left) / rect.width;
+          const offsetY = (e.clientY - rect.top) / rect.height;
+          const rotateX = (0.5 - offsetY) * 14;
+          const rotateY = (offsetX - 0.5) * 16;
+
+          card.style.transition = "transform 0.08s ease-out";
+          card.style.setProperty("--tilt-x", `${rotateX}deg`);
+          card.style.setProperty("--tilt-y", `${rotateY}deg`);
+          card.style.setProperty("--lift", "-6px");
         },
         { passive: true },
       );
 
-      card.addEventListener("mouseleave", () => {
-        card.style.transform =
-          "perspective(600px) rotateX(0deg) rotateY(0deg) translateY(0)";
-        card.style.transition = "transform 0.55s var(--ease-spring)";
-      });
-
+      card.addEventListener("mouseleave", resetTilt);
       card.addEventListener("mouseenter", () => {
         card.style.transition = "transform 0.12s ease-out";
       });
+      resetTilt();
     });
   }
 
